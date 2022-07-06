@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<title>Login</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/login_signup/common.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/login_signup/login_style.css}"/>
+</head>
+<body>
+
+	<div class="loginbox">
+		<div>
+			<img th:src="@{/img/birdy.png}" class="birdy"/>
+		</div>
+		<div class="fields">
+			<p class="heading"> What's my net worth? </p>
+			<p class="welcome"> Login </p>
+			<form th:action="@{/login}" method="POST">
+				<input type="email" name="email" placeholder="Email" value="" required><br/><br/>
+				<input type="password" name="password" placeholder="Password" value="" required><br/><br/>
+				<div class="sbtBtn">
+					<input type="submit" name="submit" value="Login">
+				</div>
+			</form>
+			<div th:if="${param.error}" id="signupErrorBox" class="signupErrorBox">
+				<p class="signupErrorBoxText"> Invalid username or password!</p>
+			</div>
+			<div th:if="${param.logout}" id="signupErrorBox" class="signupErrorBox">
+				<p class="signupErrorBoxText" style="color: green"> You have been logged out.</p>
+			</div>
+			<div>
+				<p class="footer">Don't have an account? <a class="switchhref" href="/signup">Signup</a></p>
+			</div>
+		</div>
+	</div>
+	
+</body>
+</html>

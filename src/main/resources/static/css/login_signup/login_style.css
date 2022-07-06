@@ -1,0 +1,17 @@
+.loginbox {
+	height: 400px;
+}
+
+.fields {
+	top: 50%;
+}
+
+.signupErrorBox {
+	top: 100%;
+	left: -3%;
+	width: 300px;
+}
+
+.signupErrorBoxText {
+	margin-top: 2%;
+}

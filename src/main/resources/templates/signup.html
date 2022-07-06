@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Signup</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/login_signup/common.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/login_signup/signup_style.css}" />
+</head>
+<script type="text/javascript">
+	var check = function() {
+		var pw1 = document.getElementById("password").value;
+		var pw2 = document.getElementById("password2").value;
+		if (pw1 == pw2 || pw2 == "") {
+			document.getElementById('submit').disabled = false;
+			document.getElementById('passwordErrorBox').style.visibility = 'hidden';
+		} else {
+			document.getElementById('submit').disabled = true;
+			document.getElementById('passwordErrorBox').style.visibility = 'visible';
+		}
+	}
+</script>
+<body>
+
+	<div class="loginbox">
+		<div>
+			<img th:src="@{/img/birdy.png}" class="birdy" />
+		</div>
+		<div class="fields">
+			<p class="heading">What's my net worth?</p>
+			<p class="welcome">Signup</p>
+			<form th:action="@{/signup}" th:object="${user}" method="POST">
+				<input type="email" name="email" th:field="*{email}" placeholder="Email" value="" required pattern=".{4,100}"><br /> <br />
+				<input type="text" name="name" th:field="*{name}" placeholder="Name" value="" required pattern=".{2,100}"><br /> <br />
+				<input type="password" name="password" th:field="*{password}" id="password" placeholder="Create password" value="" onkeyup='check();' required pattern=".{2,20}"><br /> <br />
+				<input type="password" name="password2" id="password2" placeholder="Confirm password" value="" onkeyup='check();' required pattern=".{2,20}">
+				<div id="passwordErrorBox" class="passwordError">
+					<p class="passwordErrorText"> Not matching</p>
+				</div>
+				<br /><br />
+				<div class="sbtBtn">
+					<input type="submit" name="submit" id="submit" value="Signup" onclick="verifyPassword()">
+				</div>
+			</form>
+			<div th:if="${error != null}" id="signupErrorBox" class="signupErrorBox">
+				<p class="signupErrorBoxText"> User already exists!</p>
+			</div>
+			<div>
+				<p class="footer">
+					Already have an account? <a class="switch" href="/login">Login</a>
+				</p>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
