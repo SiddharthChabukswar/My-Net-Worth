@@ -1,5 +1,5 @@
 body 
-{ 
+{
 	margin: 0px;
 	font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue","Fira Sans",Ubuntu,Oxygen,"Oxygen Sans",Cantarell,"Droid Sans","Apple Color Emoji","Segoe UI Emoji","Segoe UI Emoji","Segoe UI Symbol","Lucida Grande",Helvetica,Arial,sans-serif; 
 }
@@ -7,7 +7,7 @@ body
 .navbar
 {
 	top: 0%;
-	background-color: #f6f8fa;
+	background-color: #00aeef;
 	padding: 15px 10px;
 	width: 100%;
 	position: fixed;
@@ -16,7 +16,7 @@ body
 
 .fields a
 {
-	color: black;
+	color: white;
 	margin-left: 5px;
 	text-decoration: none;
 	float: left;
@@ -28,35 +28,40 @@ body
 
 .fields a:hover
 {
-	color: white;
-	background-color: #ff7820;
+	color: #00395d;
+	background-color: white;
 }
 
 .navbar-brand
 {
-	margin-top: -20px;
+	left: 20px;
+	margin-top: 0px;
 	font-weight: bold;
 	font-size: 1.6em;
-	width: 50px;
-	height: 50px;
+	width: 175px;
+	height: 70px;
+	position: relative;
 }
 
 .navbar-brand img
 {
-	width: 50px;
-	height: 40px;
+	position: relative;
+	width: 175px;
+	height: auto;
+	top: 0px;
+	left: 0px;
 }
 
 .navbar-right
 {
 	float: right;
-	margin-right: 40px;
+	margin-right: 10px;
 }
 
 .navbar-right .active 
 {
-	color: #f6f8fa;
-	background-color: #e61c0d;
+	color: white;
+	background-color: #00395d;
 }
 
 .fields

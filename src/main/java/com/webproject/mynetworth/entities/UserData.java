@@ -23,6 +23,8 @@ public class UserData {
 	private String about_me;
 	@Column(nullable = false, length = 3)
 	private Integer age;
+	@Column(nullable = false, length = 3)
+	private String image_url;
 	@Column(nullable = false, length = 10)
 	private Integer total_net_worth;
 	@Column(nullable = false, length = 10)
@@ -48,6 +50,7 @@ public class UserData {
 		this.dob = Date.valueOf("2000-01-01");
 		this.about_me = "";
 		this.age = 22;
+		this.image_url = "/user_images/default.png";
 		this.total_net_worth = 0;
 		this.numof_income_source = 0;
 		this.sumof_income_source = 0;
@@ -89,6 +92,14 @@ public class UserData {
 
 	private void setAge(Integer age) {
 		this.age = age;
+	}
+
+	public String getImage_url() {
+		return image_url;
+	}
+
+	public void setImage_url(String image_url) {
+		this.image_url = "/user_images/" + image_url;
 	}
 
 	public Integer getTotal_net_worth() {
@@ -149,8 +160,8 @@ public class UserData {
 
 	@Override
 	public String toString() {
-		return "UserData [uid=" + uid + ", dob=" + dob + ", about_me=" + about_me + ", age=" + age
-				+ ", total_net_worth=" + total_net_worth + ", numof_income_source=" + numof_income_source
+		return "UserData [uid=" + uid + ", dob=" + dob + ", about_me=" + about_me + ", age=" + age + ", image_url="
+				+ image_url + ", total_net_worth=" + total_net_worth + ", numof_income_source=" + numof_income_source
 				+ ", sumof_income_source=" + sumof_income_source + ", numof_needs=" + numof_needs + ", sumof_needs="
 				+ sumof_needs + ", numof_assets=" + numof_assets + ", sumof_assets=" + sumof_assets + "]";
 	}

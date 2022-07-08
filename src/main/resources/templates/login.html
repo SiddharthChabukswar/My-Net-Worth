@@ -10,10 +10,11 @@
 
 	<div class="loginbox">
 		<div>
-			<img th:src="@{/img/birdy.png}" class="birdy"/>
+			<img th:src="@{/img/main_logo.png}" class="logo"/>
 		</div>
 		<div class="fields">
-			<p class="heading"> What's my net worth? </p>
+			<!-- <p class="heading"> Il bilancio </p> -->
+			<br/><br/>
 			<p class="welcome"> Login </p>
 			<form th:action="@{/login}" method="POST">
 				<input type="email" name="email" placeholder="Email" value="" required><br/><br/>

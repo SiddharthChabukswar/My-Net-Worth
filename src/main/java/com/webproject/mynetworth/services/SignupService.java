@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 
 import com.webproject.mynetworth.dao.UserRepository;
 import com.webproject.mynetworth.entities.User;
-import com.webproject.mynetworth.entities.UserData;
 import com.webproject.mynetworth.exceptions.userAlreadyPresentException;
 
 @Component
@@ -45,10 +44,9 @@ public class SignupService {
 		User added_user = this.userRepository.save(this.user);
 		// Add newly added user to user data repo
 		try {
-			UserData added_user_data = this.userDataIntitializerService.addUserDataToDB(added_user.getUid());
-			System.out.println(added_user_data);
+			this.userDataIntitializerService.addUserDataToDB(added_user.getUid());
 		} catch (Exception e) {
-			System.out.println(e);
+			// System.out.println(e);
 			this.userRepository.delete(added_user);
 			throw new userAlreadyPresentException("UserData with email already present");
 		}

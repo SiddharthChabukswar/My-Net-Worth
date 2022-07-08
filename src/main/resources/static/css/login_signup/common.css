@@ -12,14 +12,14 @@
 	background: #f6f8fa
 }
 
-.birdy {
-	width: 150px;
-	height: 150px;
+.logo {
+	width: 180px;
+	height: 180px;
 	border-radius: 10%;
 	overflow: hidden;
 	position: absolute;
 	top: calc(-175px/ 2);
-	left: calc(50% - 100px);
+	left: calc(50% - 90px);
 }
 
 .heading {
@@ -79,14 +79,13 @@
 	color: #fff;
 	font-size: 16px;
 	font-weight: 100;
-	background: #e61c0d;
 	cursor: pointer;
 	border-radius: 20px;
-	background: #e61c0d;
+	background: #00aeef;
 }
 
 .loginbox input[type="submit"]:hover {
-	background: #ff7820;
+	background: #00395d;
 	color: #fff;
 }
 

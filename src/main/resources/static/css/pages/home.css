@@ -1,0 +1,92 @@
+#main_row {
+	/* background-color: red; */
+	display: flex;
+}
+
+#main_left_column {
+	/* background-color: white; */
+	min-width: 420px;
+	min-height: 600px;
+	height: 80vh;
+}
+
+#main_right_column {
+	/* background-color: white; */
+	flex: 1;
+}
+
+#card_box {
+	/* background-color: green; */
+	padding: 10px 2vw;
+	margin: 0px 5px;
+	width: 100%;
+	height: 100%;
+}
+
+#full_card {
+	position: relative;
+	background: #f6f6f6;
+	border-radius: 20px;
+	margin-left: 5%;
+	margin-top: 5%;
+	padding: 2px;
+	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+	width: 70%;
+	height: 80%;
+}
+
+#upper_card {
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+	height: 35%;
+	overflow: hidden;
+}
+
+#profile_img {
+	position: absolute;
+	overflow: hidden;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 15%;
+	border-radius: 50%;
+	border-style: solid;
+	border-color: white;
+	height: 40%;
+	width: 60%;
+	top: 0px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+#lower_card {
+	border-bottom-left-radius: 20px;
+	border-bottom-right-radius: 20px;
+	height: 75%;
+	overflow: hidden;
+}
+
+#lower_card #upper_margin {
+	margin-top: 20%;
+}
+
+#lower_card #user_name {
+	text-align: center;
+}
+
+#user_name h2 {
+	color: #00395d;
+}
+
+#user_name a {
+	text-decoration: none;
+	color: #00aeef;
+}
+
+#user_name a:hover {
+	color: #00395d;
+}
+
+
+

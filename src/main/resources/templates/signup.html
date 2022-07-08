@@ -25,10 +25,10 @@
 
 	<div class="loginbox">
 		<div>
-			<img th:src="@{/img/birdy.png}" class="birdy" />
+			<img th:src="@{/img/main_logo.png}" class="logo" />
 		</div>
 		<div class="fields">
-			<p class="heading">What's my net worth?</p>
+			<br/><br/>
 			<p class="welcome">Signup</p>
 			<form th:action="@{/signup}" th:object="${user}" method="POST">
 				<input type="email" name="email" th:field="*{email}" placeholder="Email" value="" required pattern=".{4,100}"><br /> <br />
