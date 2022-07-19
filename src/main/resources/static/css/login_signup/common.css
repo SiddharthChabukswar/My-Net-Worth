@@ -9,7 +9,7 @@
 	height: 550px;
 	box-sizing: border-box;
 	padding: 80px 40px;
-	background: #f6f8fa
+	background: #f6f8fa;
 }
 
 .logo {
@@ -117,7 +117,7 @@
 		sans-serif;
 }
 
-.switch_href {
+.switchhref {
 	text-align: center;
 	font-size: 1.0em;
 	font-weight: 500;

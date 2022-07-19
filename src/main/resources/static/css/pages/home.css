@@ -1,38 +1,46 @@
-#main_row {
+body #main_row {
 	/* background-color: red; */
+	min-height: 600px;
+	min-width: 1200px;
+	height: 80vh;
+	overflow: hidden;
 	display: flex;
 }
 
-#main_left_column {
+#main_row #main_left_column {
 	/* background-color: white; */
-	min-width: 420px;
-	min-height: 600px;
-	height: 80vh;
+	min-width: 300px;
+	width: 25%;
+	overflow: hidden;	
 }
 
-#main_right_column {
+#main_row #main_right_column {
 	/* background-color: white; */
 	flex: 1;
+	min-height: 570px;
+	min-width: 900px;
+	overflow: hidden;
 }
 
-#card_box {
+#main_left_column #card_box {
 	/* background-color: green; */
-	padding: 10px 2vw;
+	padding: 5% 5%;
 	margin: 0px 5px;
 	width: 100%;
 	height: 100%;
+	overflow: hidden;
 }
 
 #full_card {
 	position: relative;
 	background: #f6f6f6;
 	border-radius: 20px;
-	margin-left: 5%;
-	margin-top: 5%;
+	margin: 5% 5%;
 	padding: 2px;
 	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-	width: 70%;
-	height: 80%;
+	width: 90%;
+	height: 90%;
+	overflow: hidden;
 }
 
 #upper_card {
@@ -61,9 +69,8 @@
 }
 
 #lower_card {
-	border-bottom-left-radius: 20px;
-	border-bottom-right-radius: 20px;
-	height: 75%;
+	position: relative;
+	height: 55%;
 	overflow: hidden;
 }
 
@@ -88,5 +95,211 @@
 	color: #00395d;
 }
 
+#lower_card #about_me {
+	/* background: red; */
+	position: absolute;
+	bottom: 2%;
+	color: #000000;
+	height: 38%;
+	width: 96%;
+	margin: 0% 2%;
+	border-radius: 10px;
+	text-align: center;
+	overflow: auto;
+}
 
+#net_worth_info {
+	/* background: red; */
+	height: 65%;
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+	overflow: hidden;
+}
 
+#net_worth_info #income_source_box {
+	margin: 3% 5%;
+	border-radius: 10px;
+	height: 40%;
+	/* background: black; */
+	text-align: center;
+	overflow: hidden;
+}
+
+#net_worth_info #income_source_box:hover {
+	border: 2px solid #eaecef;
+}
+
+#income_source_box #value_field {
+	margin-top: 2%;
+	margin-bottom: 1%;
+	margin-left: 5%;
+	margin-right: 5%;
+	height: 50%;
+}
+
+#income_source_box #key_field {
+	margin-top: 1%;
+	margin-bottom: 2%;
+	margin-left: 5%;
+	margin-right: 5%;
+	height: 30%;
+}
+
+#net_worth_box {
+	border-bottom-left-radius: 20px;
+	border-bottom-right-radius: 20px;
+	height: 10%;
+	overflow: hidden;
+	cursor: pointer;
+	text-align: center;
+}
+
+#net_worth_box:hover{
+	background-color: #eaecef;
+}
+
+#net_worth_box #net_worth_field {
+	margin: 5%;
+}
+
+#net_worth_box #net_worth_field p {
+	color: #414141;
+}
+
+::-webkit-scrollbar {
+	width: 20px;
+}
+
+::-webkit-scrollbar-track {
+	background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: #d6dee1;
+	border-radius: 20px;
+	border: 6px solid transparent;
+	background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background-color: #a8bbbf;
+}
+
+#main_right_column #details_box {
+	/* background-color: blue; */
+	margin: auto;
+	margin-top: 3%;
+	margin-bottom: 3%;
+	height:90%;
+	width: 94%;
+	overflow: hidden;
+}
+
+#details_box #label_row {
+	/* background-color: orange; */
+	margin: auto;
+	margin-top: 2%;
+	margin-bottom: 1%;
+	height: 30%;
+	width: 94%;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	overflow: hidden;
+}
+
+#label_row .label_card {
+	/* background-color: white; */
+	width: 40%;
+	height: 80%;
+	border-radius: 10px;
+	border: 2px solid #eaecef;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	overflow: hidden;
+}
+
+#inner_label_card1 {
+	/* background-color: black; */
+	width: 60%;
+	height: 100%;
+	border-right: 2px solid #eaecef;
+	text-align: center;
+	overflow: hidden;
+}
+
+#inner_label_card2 {
+	/* background-color: green; */
+	width: 40%;
+	height: 100%;
+	text-align: center;
+	overflow: hidden;
+}
+
+#value_field2 {
+	/* background-color: green; */
+	margin: auto;
+	margin-top: 5%;
+	margin-bottom: 1%;
+	padding-top: 10%;
+	overflow: auto;
+	height: 60%;
+}
+
+#key_field2 {
+	/* background-color: red; */
+	margin: auto;
+	margin-top: 1%;
+	margin-bottom: 5%;
+	padding-top: 5%;
+	height: 30%;
+}
+
+#value_field3 {
+	/* background-color: green; */
+	margin: auto;
+	margin-top: 5%;
+	margin-bottom: 1%;
+	padding-top: 17%;
+	overflow: auto;
+	height: 60%;
+}
+
+#key_field3 {
+	/* background-color: red; */
+	margin: auto;
+	margin-top: 1%;
+	margin-bottom: 5%;
+	padding-top: 10%;
+	height: 30%;
+}
+
+#details_box #description_row {
+	/* background-color: green; */
+	margin: auto;
+	margin-top: 1%;
+	margin-bottom: 2%;
+	height: 65%;
+	width: 85%;
+	overflow: hidden;
+}
+
+.description_row_style {
+	background-color: #eaecef;
+	border-radius: 10px;
+	margin: auto;
+	height: 92%;
+	width: 96%;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+	overflow: auto;
+}
+
+#description_title {
+	/* background-color: white; */
+	color: #00395d;
+	margin-left: 1%;
+	margin-top: 1%;
+	width: 80%;
+}

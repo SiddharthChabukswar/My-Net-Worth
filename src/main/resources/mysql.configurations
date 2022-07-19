@@ -10,26 +10,28 @@ CREATE DATABASE mynetworthdb;
 
 mysql -u mynetworthadmin -p
 mynetworthadmin
-
 USE mynetworthdb;
 
-DROP TABLE `User`;
-DROP TABLE `UserData`;
-DROP TABLE hibernate_sequence;
+DROP DATABASE mynetworthdb;
+CREATE DATABASE mynetworthdb;
+USE mynetworthdb;
+
+SHOW TABLES;
 
 CREATE TABLE `User`(
 	uid INT(10) UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	email VARCHAR(100) NOT NULL UNIQUE,
-	name VARCHAR(100) NOT NULL, 
 	password VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE `UserData`(
 	uid INT(10) UNSIGNED PRIMARY KEY NOT NULL,
+	name VARCHAR(100) NOT NULL,
 	dob DATE NOT NULL,
 	about_me TEXT,
 	age INT(3) NOT NULL,
 	image_url VARCHAR(100) NOT NULL,
+	cover_image_url VARCHAR(100) NOT NULL,
 	total_net_worth INT(10) NOT NULL,
 	numof_income_source INT(10) NOT NULL,
 	sumof_income_source INT(10) NOT NULL,
@@ -39,6 +41,23 @@ CREATE TABLE `UserData`(
 	sumof_assets INT(10) NOT NULL
 );
 
+CREATE TABLE `UserIncome`(
+	income_id INT(10) UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	uid INT(10) UNSIGNED NOT NULL,
+	amount INT(10) UNSIGNED NOT NULL,
+	source_name VARCHAR(100) NOT NULL,
+	date_added TIMESTAMP NOT NULL,
+	last_modified TIMESTAMP NOT NULL,
+	description TEXT,
+	FOREIGN KEY(uid)
+		REFERENCES UserData(uid)
+		ON DELETE CASCADE,
+	INDEX(uid)
+);
+
+SHOW TABLES;
+
 SELECT * FROM `User`;
 SELECT * FROM `UserData`;
-
+SELECT * FROM `UserIncome`;
+SELECT * FROM hibernate_sequence;

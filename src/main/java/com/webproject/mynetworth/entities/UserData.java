@@ -17,14 +17,18 @@ public class UserData {
 	@Column(nullable = false, length = 10)
 	private Integer uid;
 
+	@Column(nullable = false, length = 100)
+	private String name;
 	@Column(columnDefinition = "DATE")
 	private Date dob;
 	@Column(columnDefinition = "TEXT")
 	private String about_me;
 	@Column(nullable = false, length = 3)
 	private Integer age;
-	@Column(nullable = false, length = 3)
+	@Column(nullable = false, length = 100)
 	private String image_url;
+	@Column(nullable = false, length = 100)
+	private String cover_image_url;
 	@Column(nullable = false, length = 10)
 	private Integer total_net_worth;
 	@Column(nullable = false, length = 10)
@@ -44,13 +48,15 @@ public class UserData {
 		super();
 	}
 
-	public UserData(Integer uid) {
+	public UserData(Integer uid, String name) {
 		super();
 		this.uid = uid;
+		this.name = name;
 		this.dob = Date.valueOf("2000-01-01");
 		this.about_me = "";
 		this.age = 22;
-		this.image_url = "/user_images/default.png";
+		this.image_url = "default.png";
+		this.cover_image_url = "default.jpg";
 		this.total_net_worth = 0;
 		this.numof_income_source = 0;
 		this.sumof_income_source = 0;
@@ -66,6 +72,14 @@ public class UserData {
 
 	public void setUid(Integer uid) {
 		this.uid = uid;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public Date getDob() {
@@ -95,11 +109,19 @@ public class UserData {
 	}
 
 	public String getImage_url() {
-		return image_url;
+		return "file-storage-system/images/profile_photos/" + image_url;
 	}
 
 	public void setImage_url(String image_url) {
-		this.image_url = "/user_images/" + image_url;
+		this.image_url = image_url;
+	}
+
+	public String getCover_image_url() {
+		return "file-storage-system/images/cover_photos/" + cover_image_url;
+	}
+
+	public void setCover_image_url(String cover_image_url) {
+		this.cover_image_url = cover_image_url;
 	}
 
 	public Integer getTotal_net_worth() {
@@ -160,10 +182,11 @@ public class UserData {
 
 	@Override
 	public String toString() {
-		return "UserData [uid=" + uid + ", dob=" + dob + ", about_me=" + about_me + ", age=" + age + ", image_url="
-				+ image_url + ", total_net_worth=" + total_net_worth + ", numof_income_source=" + numof_income_source
-				+ ", sumof_income_source=" + sumof_income_source + ", numof_needs=" + numof_needs + ", sumof_needs="
-				+ sumof_needs + ", numof_assets=" + numof_assets + ", sumof_assets=" + sumof_assets + "]";
+		return "UserData [uid=" + uid + ", name=" + name + ", dob=" + dob + ", about_me=" + about_me + ", age=" + age
+				+ ", image_url=" + image_url + ", cover_image_url=" + cover_image_url + ", total_net_worth="
+				+ total_net_worth + ", numof_income_source=" + numof_income_source + ", sumof_income_source="
+				+ sumof_income_source + ", numof_needs=" + numof_needs + ", sumof_needs=" + sumof_needs
+				+ ", numof_assets=" + numof_assets + ", sumof_assets=" + sumof_assets + "]";
 	}
 
 }

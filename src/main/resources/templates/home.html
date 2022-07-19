@@ -2,14 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="header::header_head('Home')"></head>
 <head>
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/pages/home.css}">
-	<style type="text/css">
+	<style type="text/css" th:inline="css">
 		#upper_card {
-			background-image: url("/cover_images/default.jpg");
+			background-image: url([[${cover_image_url}]]);
 			background-size: 100% 100%;
 		}
 		#profile_img {
-			background-image: url("/user_images/default.png");
+			background-image: url([[${image_url}]]);
 			background-size: 100% 100%;
 		}
 	</style>
@@ -19,28 +20,161 @@
 	<div id="header" th:include="header::header_body('home')"></div>
 
 	<div id="body_structure" class="container-fluid">
-		<div class="row m-1 p-2" id="main_row">
-			<div class="col-4 m-1 p-2" id="main_left_column">
+		<div id="main_row">
+			<div id="main_left_column">
 				<div id="card_box">
 					<div id="full_card">
 						<div id="upper_card"></div>
 						<div id="profile_img"></div>
 						<div id="lower_card">
-							<div id="upper_margin"><br/></div>
-							<div id="user_name">
-								<h2>Siddharth Chabukswar</h2>
-								<a href="/myprofile" class="p">@siddharthchabukswar360</a>
+							<div id="upper_margin">
+								<br />
+							</div>
+
+							<div id="profile_info">
+								<div id="user_name">
+									<h2>
+										<span th:text="${user_name}"></span>
+									</h2>
+									<a href="/myprofile">
+										<span th:text="${email}"></span>
+									</a>
+								</div>
+								<div id="about_me">
+									<p>
+										<span th:text="${about_me}"></span>
+									</p>
+								</div>
+							</div>
+
+							<div id="net_worth_info" style="display: none;">
+								<div id="income_source_box">
+									<div id="value_field">
+										<h2><span th:text="${numof_income_source}">10</span></h2>
+									</div>
+									<div id="key_field">
+										<p>Number of income sources</p>
+									</div>
+								</div>
+								
+								<div id="income_source_box">
+									<div id="value_field">
+										<h2>₹<span th:text="${sumof_income_source}">10</span></h2>
+									</div>
+									<div id="key_field">
+										<p>Total income from sources</p>
+									</div>
+								</div>
+							</div>
+							
+						</div>
+						<div id="net_worth_box">
+							<div id="net_worth_field">
+								<p>Total net worth: ₹<span th:text="${total_net_worth}"></span></p>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			
-			<div class="col-7 m-2 d-none d-lg-block" id="main_right_column">
+
+			<div id="main_right_column">
+				<div id="details_box">
+					<div id="label_row">
+						<div class="label_card" id="label_card1">
+							<div id="inner_label_card1">
+								<div id="value_field2">
+									<h2>₹<span th:text="${sumof_needs}">10</span></h2>
+								</div>
+								<div id="key_field2">
+									<p>Total needs amount</p>
+								</div>
+							</div>
+							<div id="inner_label_card2">
+								<div id="value_field3">
+									<h2><span th:text="${numof_needs}">10</span></h2>
+								</div>
+								<div id="key_field3">
+									<p>Needs count</p>
+								</div>
+							</div>
+						</div>
+						<div class="label_card" id="label_card2">
+							<div id="inner_label_card1">
+								<div id="value_field2">
+									<h2>₹<span th:text="${sumof_assets}">10</span></h2>
+								</div>
+								<div id="key_field2">
+									<p>Total assets amount</p>
+								</div>
+							</div>
+							<div id="inner_label_card2">
+								<div id="value_field3">
+									<h2><span th:text="${numof_assets}">10</span></h2>
+								</div>
+								<div id="key_field3">
+									<p>Assets count</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div id="description_row">
+						<div class="description_row_style" id="description_row1" style="display: none;">
+							<div id="description_title">
+								<h1>Needs</h1>
+							</div>
+						</div>
+						<div class="description_row_style" id="description_row2" style="display: none;">
+							<div id="description_title">
+								<h1>Assets</h1>
+							</div>
+						</div>
+					</div>
+					
+					
+				</div>
 			</div>
-		
+
 		</div>
 	</div>
-	
+
+	<script>
+		$( "#net_worth_box" )
+			.click( function() {
+				$( "#net_worth_info" ).toggle("medium");
+				$( "#profile_info" ).toggle("medium");
+			});
+		
+		$( "#label_card1" )
+			.mouseover( function() {
+				$( this ).css({"border":"4px solid #eaecef", "cursor":"pointer"});
+				$( this ).children( "#inner_label_card1" ).css({"border-right":"4px solid #eaecef"});
+			})
+			.mouseout( function() {
+				$( this ).css("border", "2px solid #eaecef");
+				$( this ).children( "#inner_label_card1" ).css({"border-right":"2px solid #eaecef"});
+			}).click( function() {
+				if ( $( "#description_row2" ).css('display') != 'none' ){
+					$( "#description_row2" ).toggle("medium");
+				}
+				$( "#description_row1" ).toggle("medium");
+			});
+		
+		$( "#label_card2" )
+		.mouseover( function() {
+			$( this ).css({"border":"4px solid #eaecef", "cursor":"pointer"});
+			$( this ).children( "#inner_label_card1" ).css({"border-right":"4px solid #eaecef"});
+		})
+		.mouseout( function() {
+			$( this ).css("border", "2px solid #eaecef");
+			$( this ).children( "#inner_label_card1" ).css({"border-right":"2px solid #eaecef"});
+		}).click( function() {
+			if ( $( "#description_row1" ).css('display') != 'none' ){
+				$( "#description_row1" ).toggle("medium");
+			}
+			$( "#description_row2" ).toggle("medium");
+		});
+	</script>
+
 </body>
 </html>

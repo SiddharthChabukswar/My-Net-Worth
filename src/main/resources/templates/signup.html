@@ -32,7 +32,7 @@
 			<p class="welcome">Signup</p>
 			<form th:action="@{/signup}" th:object="${user}" method="POST">
 				<input type="email" name="email" th:field="*{email}" placeholder="Email" value="" required pattern=".{4,100}"><br /> <br />
-				<input type="text" name="name" th:field="*{name}" placeholder="Name" value="" required pattern=".{2,100}"><br /> <br />
+				<input type="text" name="name" th:name="name" placeholder="Name" value="" required pattern=".{2,100}"><br /> <br />
 				<input type="password" name="password" th:field="*{password}" id="password" placeholder="Create password" value="" onkeyup='check();' required pattern=".{2,20}"><br /> <br />
 				<input type="password" name="password2" id="password2" placeholder="Confirm password" value="" onkeyup='check();' required pattern=".{2,20}">
 				<div id="passwordErrorBox" class="passwordError">
@@ -48,7 +48,7 @@
 			</div>
 			<div>
 				<p class="footer">
-					Already have an account? <a class="switch" href="/login">Login</a>
+					Already have an account? <a class="switchhref" href="/login">Login</a>
 				</p>
 			</div>
 		</div>

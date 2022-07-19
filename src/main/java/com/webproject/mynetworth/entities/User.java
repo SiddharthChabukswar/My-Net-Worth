@@ -18,8 +18,6 @@ public class User {
 	@Column(nullable = false, unique = true, length = 100)
 	private String email;
 	@Column(nullable = false, length = 100)
-	private String name;
-	@Column(nullable = false, length = 100)
 	private String password;
 
 	public User() {
@@ -30,7 +28,6 @@ public class User {
 		super();
 		this.uid = uid;
 		this.email = email;
-		this.name = name;
 		this.password = password;
 	}
 
@@ -50,14 +47,6 @@ public class User {
 		this.email = email;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public String getPassword() {
 		return password;
 	}
@@ -68,7 +57,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [uid=" + uid + ", email=" + email + ", name=" + name + ", password=" + password + "]";
+		return "User [uid=" + uid + ", email=" + email + ", password=" + password + "]";
 	}
 
 }

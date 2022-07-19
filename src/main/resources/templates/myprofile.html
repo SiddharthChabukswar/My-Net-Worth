@@ -1,15 +1,271 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="header::header_head('My-profile')">
+<head th:replace="header::header_head('My-profile')"></head>
+<head>
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/pages/home.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/pages/myprofile.css}">
+	<style type="text/css" th:inline="css">
+		#upper_card {
+			background-image: url([[${cover_image_url}]]);
+			background-size: 100% 100%;
+		}
+		#profile_img {
+			background-image: url([[${image_url}]]);
+			background-size: 100% 100%;
+		}
+	</style>
 </head>
 <body>
-	<div th:include="header::header_body('none')">
-	
+
+	<div id="header" th:include="header::header_body('none')"></div>
+
+	<div id="body_structure" class="container-fluid">
+		<div id="main_row">
+			<div id="main_left_column">
+				<div id="card_box">
+					<form id="full_card" th:action="@{/update_profile}" method="POST" enctype="multipart/form-data">
+						<div id="upper_card">
+							<input id="cover_input_button" type="file" th:name="cover_image_url" accept="image/*"></input>
+							<label for="cover_input_button" class="cover_image_input_class"></label>
+						</div>
+						<div id="lower_card">
+							<div id="upper_margin">
+								<br />
+							</div>
+							<div id="profile_info">
+								<div id="user_name">
+									<h2>
+										<input id="input_name" type="text" th:name="name" placeholder="Name" th:value="${user_name}" pattern=".{2,100}" />
+									</h2>
+									<input id="input_date" type="text" th:name="dob" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="D.O.B" th:value="${dob}" />
+								</div>
+								<textarea id="about_me" th:name="about_me" placeholder="Describe yourself..." th:text="${about_me}" maxlength="65535"></textarea>
+							</div>
+						</div>
+						<div id="profile_img">
+							<input id="profile_input_button" type="file" th:name="image_url" accept="image/*"></input>
+							<label for="profile_input_button" class="profile_image_input_class"></label>
+						</div>
+						
+						
+						<div id="button_box">
+							<input class="button_style" type="submit" name="submit" value="Submit" />
+							<input class="button_style" type="reset" name="reset" value="Reset" onclick="clearResult()"/>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div id="main_right_column">
+				<div id="outer_right_box">
+					<div id="column_divider">
+						<div id="navigation_column">
+							<div class="navigation_heading">
+								<h2>Income</h2>
+							</div>
+							<div class="navigation_box" id="navigation_box_1" style="background: white; color: black;">
+								<p>View all Income Sources</p>
+							</div>
+							<div class="navigation_box" id="navigation_box_2">
+								<p>Add an Income Source</p>
+							</div>
+							<div class="navigation_box" id="navigation_box_3">
+								<p>Update an Income Source</p>
+							</div>
+							<div class="navigation_box" id="navigation_box_4">
+								<p>Delete Income Sources</p>
+							</div>
+						</div>
+						<div id="content_column">
+							<div id="content_box">
+								
+								<!-- View all income source table -->
+								<div class="content_container" id="content_1" style="display: block;">
+									<div class="content_heading">
+										<h1>My income sources</h1>
+									</div>
+									<div class="content_body">
+										<div id="table_container">
+											<table class="styled-table">
+												<thead>
+													<tr>
+														<th>#</th>
+														<th>Source Name</th>
+														<th>Amount</th>
+														<th>Date Added</th>
+														<th>Last Modified</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>
+															<div>1</div>
+														</td>
+														<td>
+															<div>Dom hi hello and thankyou yo! sdsuhds dkjhsjkdhddsdsdsdsdsdsddssddsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdss</div>
+														</td>
+														<td>
+															<div>10000</div>
+														</td>
+														<td>
+															<div>2022-07-19</div>
+														</td>
+														<td>
+															<div>2022-07-19</div>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+								
+								<!-- Add income source block -->
+								<div class="content_container" id="content_2">
+									<div class="content_heading">
+										<h1>Add a source</h1>
+									</div>
+									<div class="content_body">
+										<form id="add_source_box" th:action="@{/addincomesource}" th:object="${user_income}" method="POST">
+											<div id="add_source_main_box">
+												<h2>
+													<input class="source_info_input" type="text" th:name="source_name" th:field="*{source_name}" placeholder="Source name" pattern=".{2,100}" required="required"/>
+													<input class="source_info_input" type="number" th:name="amount" th:field="*{amount}" placeholder="Income amount" min="1" max="2147483647" required="required"/>
+												</h2>
+												<textarea id="income_description" th:name="description" th:field="*{description}" placeholder="Add income description ..." maxlength="65535"></textarea>
+											</div>
+											<div id="add_source_button_box">
+												<input class="button_style" type="submit" name="submit" value="Submit" />
+												<input class="button_style" type="reset" name="reset" value="Reset"/>
+											</div>
+										</form>
+									</div>
+								</div>
+								
+								<!-- Update income source block -->
+								<div class="content_container" id="content_3">
+									<div class="content_heading">
+										<h1>Update a source</h1>
+									</div>
+									<div class="content_body">
+										<h1>Body</h1>
+									</div>
+								</div>
+								
+								<!-- Delete income sources block -->
+								<div class="content_container" id="content_4">
+									<div class="content_heading">
+										<h1>Delete sources</h1>
+									</div>
+									<div class="content_body">
+										<h1>Body</h1>
+									</div>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 	
-	<div class="container" style="margin-top: 90px;">
-		<h1>My Profile</h1>
-	</div>
+	<script type="text/javascript" th:inline="javascript">
+		document.getElementById('profile_input_button').addEventListener('change', readURL1, true);
+		function readURL1() {
+			var file = document.getElementById("profile_input_button").files[0];
+			if (file.size > 20971520) {
+				alert("Please select a image below 20MB!");
+				this.value = "";
+				return;
+			};
+			var reader = new FileReader();
+			reader.onloadend = function() {
+				document.getElementById('profile_img').style.backgroundImage = "url("
+						+ reader.result + ")";
+			}
+			if (file) {
+				reader.readAsDataURL(file);
+			} else {
+			}
+		}
+
+		document.getElementById('cover_input_button').addEventListener('change', readURL2, true);
+		function readURL2() {
+			var file = document.getElementById("cover_input_button").files[0];
+			if (file.size > 20971520) {
+				alert("Please select a image below 20MB!");
+				this.value = "";
+				return;
+			};
+			var reader = new FileReader();
+			reader.onloadend = function() {
+				document.getElementById('upper_card').style.backgroundImage = "url("
+						+ reader.result + ")";
+			}
+			if (file) {
+				reader.readAsDataURL(file);
+			} else {
+			}
+		}
+
+		function clearResult() {
+			document.getElementById('profile_input_button')
+			document.getElementById('cover_input_button')
+			document.getElementById('profile_img').style.backgroundImage = "url("
+					+ /*[[${image_url}]]*/+")";
+			document.getElementById('upper_card').style.backgroundImage = "url("
+					+ /*[[${cover_image_url}]]*/+")";
+		}
+	</script>
+	
+	<script>
+		function reset_nav_buttons() {
+			$( "#navigation_box_1" ).css({"background":"#00aeef", "color":"white"});
+			$( "#navigation_box_2" ).css({"background":"#00aeef", "color":"white"});
+			$( "#navigation_box_3" ).css({"background":"#00aeef", "color":"white"});
+			$( "#navigation_box_4" ).css({"background":"#00aeef", "color":"white"});
+		}
+		
+		function reset_content_box() {
+			$( "#content_1" ).css({"display":"none"});
+			$( "#content_2" ).css({"display":"none"});
+			$( "#content_3" ).css({"display":"none"});
+			$( "#content_4" ).css({"display":"none"});
+		}
+	
+		$( "#navigation_box_1" )
+		.click( function() {
+			reset_nav_buttons();
+			reset_content_box();
+			$( this ).css({"background":"white", "color":"black"});
+			$( "#content_1" ).css({"display":"block"});
+		});
+		
+		$( "#navigation_box_2" )
+		.click( function() {
+			reset_nav_buttons();
+			reset_content_box();
+			$( this ).css({"background":"white", "color":"black"});
+			$( "#content_2" ).css({"display":"block"});
+		});
+		
+		$( "#navigation_box_3" )
+		.click( function() {
+			reset_nav_buttons();
+			reset_content_box();
+			$( this ).css({"background":"white", "color":"black"});
+			$( "#content_3" ).css({"display":"block"});
+		});
+		
+		$( "#navigation_box_4" )
+		.click( function() {
+			reset_nav_buttons();
+			reset_content_box();
+			$( this ).css({"background":"white", "color":"black"});
+			$( "#content_4" ).css({"display":"block"});
+		});
+	</script>
 	
 </body>
 </html>

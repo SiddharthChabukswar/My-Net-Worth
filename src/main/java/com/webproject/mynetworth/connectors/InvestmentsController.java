@@ -9,15 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class InvestmentsController extends GetUserIdParent {
+public class InvestmentsController extends ControllerParent {
 
 	// Investments page handler - default called when investments passed
 	@RequestMapping(value = { "/investments" }, method = { RequestMethod.GET, RequestMethod.POST })
 	private String investmentsPage(HttpSession session, Principal principal) {
-		if (session.getAttribute("uid") == null) {
-			int uid = getUserIdService.getUserIdFromEmail(principal);
-			session.setAttribute("uid", uid);
-		}
+		int uid = this.getUidFromSession(session, principal);
+		System.out.println(uid);
 		return "investments";
 	}
 

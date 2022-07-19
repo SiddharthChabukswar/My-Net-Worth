@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.webproject.mynetworth.dao.UserDataRepository;
 import com.webproject.mynetworth.entities.UserData;
-import com.webproject.mynetworth.exceptions.userAlreadyPresentException;
+import com.webproject.mynetworth.exceptions.UserAlreadyPresentException;
 
 @Component
 public class UserDataIntitializerService {
@@ -26,11 +26,12 @@ public class UserDataIntitializerService {
 	}
 
 	// Add new user data to DB
-	public UserData addUserDataToDB(int uid) throws userAlreadyPresentException {
+	public UserData addUserDataToDB(int uid, String name) throws UserAlreadyPresentException {
 		if (checkUserDataAlreadyPresent(uid) == true) {
-			throw new userAlreadyPresentException("UserData with email already present");
+			throw new UserAlreadyPresentException("UserData with email already present");
 		}
-		this.userData = new UserData(uid);
+		this.userData = new UserData(uid, name);
+		
 		return this.userDataRepository.save(this.userData);
 	}
 
