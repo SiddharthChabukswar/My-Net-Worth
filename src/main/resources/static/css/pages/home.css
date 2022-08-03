@@ -1,4 +1,4 @@
-body #main_row {
+.main_row {
 	/* background-color: red; */
 	min-height: 600px;
 	min-width: 1200px;
@@ -7,14 +7,14 @@ body #main_row {
 	display: flex;
 }
 
-#main_row #main_left_column {
+.main_row #main_left_column {
 	/* background-color: white; */
 	min-width: 300px;
 	width: 25%;
 	overflow: hidden;	
 }
 
-#main_row #main_right_column {
+.main_row #main_right_column {
 	/* background-color: white; */
 	flex: 1;
 	min-height: 570px;

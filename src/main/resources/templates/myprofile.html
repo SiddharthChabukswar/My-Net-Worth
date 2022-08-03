@@ -20,8 +20,8 @@
 
 	<div id="header" th:include="header::header_body('none')"></div>
 
-	<div id="body_structure" class="container-fluid">
-		<div id="main_row">
+	<div class="container-fluid">
+		<div class="main_row">
 			<div id="main_left_column">
 				<div id="card_box">
 					<form id="full_card" th:action="@{/update_profile}" method="POST" enctype="multipart/form-data">
@@ -82,61 +82,58 @@
 								<!-- View all income source table -->
 								<div class="content_container" id="content_1" style="display: block;">
 									<div class="content_heading">
-										<h1>My income sources</h1>
+										<h1>My Income Sources</h1>
 									</div>
 									<div class="content_body">
-										<div id="table_container">
+										<div class="table_container" id="show_table_data">
 											<table class="styled-table">
 												<thead>
 													<tr>
-														<th>#</th>
+														<th style="width: 8%; max-width: 8%; min-width: 8%">#</th>
 														<th>Source Name</th>
 														<th>Amount</th>
 														<th>Date Added</th>
 														<th>Last Modified</th>
 													</tr>
 												</thead>
-												<tbody>
-													<tr>
-														<td>
-															<div>1</div>
-														</td>
-														<td>
-															<div>Dom hi hello and thankyou yo! sdsuhds dkjhsjkdhddsdsdsdsdsdsddssddsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdss</div>
-														</td>
-														<td>
-															<div>10000</div>
-														</td>
-														<td>
-															<div>2022-07-19</div>
-														</td>
-														<td>
-															<div>2022-07-19</div>
-														</td>
-													</tr>
+												<tbody id="view_income_sources_table_data">
 												</tbody>
 											</table>
 										</div>
+										
+										<div class="description_box_div" id="show_description_box">
+											<div id="FirstFlexRow">
+												<div id="descriptionHeading">
+													<h2>Description</h2>
+												</div>
+												<div id="descriptionClose">
+													<span>Close</span>
+												</div>
+											</div>
+											<div id="SecondRow">
+											</div>
+										</div>
+										
 									</div>
 								</div>
 								
 								<!-- Add income source block -->
 								<div class="content_container" id="content_2">
 									<div class="content_heading">
-										<h1>Add a source</h1>
+										<h1>Add A Source</h1>
 									</div>
 									<div class="content_body">
-										<form id="add_source_box" th:action="@{/addincomesource}" th:object="${user_income}" method="POST">
-											<div id="add_source_main_box">
+										<form class="source_form_class" id="add_source_box" th:action="@{/addincomesource}" th:object="${user_income}" method="POST">
+											<div class="add_source_main_box">
 												<h2>
-													<input class="source_info_input" type="text" th:name="source_name" th:field="*{source_name}" placeholder="Source name" pattern=".{2,100}" required="required"/>
-													<input class="source_info_input" type="number" th:name="amount" th:field="*{amount}" placeholder="Income amount" min="1" max="2147483647" required="required"/>
+													<input class="source_info_input" type="text" th:name="source_name" th:field="*{source_name}" placeholder="Source name" pattern=".{2,100}" required="required" autocomplete="off"/>
+													<input class="source_info_input" type="number" th:name="amount" th:field="*{amount}" placeholder="Income amount" min="1" max="2147483647" required="required" autocomplete="off"/>
 												</h2>
-												<textarea id="income_description" th:name="description" th:field="*{description}" placeholder="Add income description ..." maxlength="65535"></textarea>
+												<textarea class="income_description" th:name="description" th:field="*{description}" placeholder="Add income description ..." maxlength="65535"></textarea>
 											</div>
-											<div id="add_source_button_box">
-												<input class="button_style" type="submit" name="submit" value="Submit" />
-												<input class="button_style" type="reset" name="reset" value="Reset"/>
+											<div class="add_source_button_box">
+												<input class="button_style" type="submit" name="submit" value="Add" />
+												<input class="button_style" id="reset1" type="reset" name="reset" value="Reset"/>
 											</div>
 										</form>
 									</div>
@@ -145,23 +142,84 @@
 								<!-- Update income source block -->
 								<div class="content_container" id="content_3">
 									<div class="content_heading">
-										<h1>Update a source</h1>
+										<h1>Update A Source</h1>
 									</div>
 									<div class="content_body">
-										<h1>Body</h1>
+										<div class="table_container" id="update_table_container">
+											<table class="styled-table">
+												<thead>
+													<tr>
+														<th style="width: 8%; max-width: 8%; min-width: 8%">#</th>
+														<th>Source Name</th>
+														<th>Amount</th>
+														<th>Date Added</th>
+														<th>Last Modified</th>
+													</tr>
+												</thead>
+												<tbody id="update_income_sources_table_data">
+												</tbody>
+											</table>
+										</div>
+										<div class="table_container" id="update_form_container">
+											<form class="source_form_class" th:action="@{/updateincomesource}" method="POST">
+												<div class="add_source_main_box" id="update_input_box">
+													<h2>
+														<input class="source_info_input" id="update_source_box_income_id" type="number" th:name="income_id" required="required" style="display: none;"/>
+														<input class="source_info_input" id="update_source_box_source_name" type="text" th:name="source_name" placeholder="Source name" pattern=".{2,100}" required="required" autocomplete="off" />
+														<input class="source_info_input" id="update_source_box_amount" type="number" th:name="amount" placeholder="Income amount" min="1" max="2147483647" required="required" autocomplete="off" />
+													</h2>
+													<textarea class="income_description" id="update_source_box_description" th:name="description" placeholder="Add income description ..." maxlength="65535"></textarea>
+												</div>
+												<div id="confirm_update_box">
+													<div id="confirm_update_box_inner">
+														<h2>Please confirm to update the changes.</h2>
+													</div>
+												</div>
+												<div class="add_source_button_box">
+													<input class="button_style" type="button" name="update" id="updatedata" value="Update" onclick="openConfirmUpateDiv()" />
+													<input class="button_style" type="button" name="cancel" value="Cancel" onclick="closeUpateDiv()" />
+													<input class="button_style" type="submit" name="submit" id="submitdata" value="Submit" style="display: none;"/>
+												</div>
+											</form>
+										</div>
 									</div>
 								</div>
 								
 								<!-- Delete income sources block -->
 								<div class="content_container" id="content_4">
 									<div class="content_heading">
-										<h1>Delete sources</h1>
+										<h1>Delete Sources</h1>
 									</div>
 									<div class="content_body">
-										<h1>Body</h1>
+										<div class="table_container" id="delete_table_data">
+											<table class="styled-table">
+												<thead>
+													<tr>
+														<th style="width: 8%; max-width: 8%; min-width: 8%">#</th>
+														<th>Source Name</th>
+														<th>Amount</th>
+														<th>Date Added</th>
+														<th>Last Modified</th>
+													</tr>
+												</thead>
+												<tbody id="delete_income_sources_table_data">
+												</tbody>
+											</table>
+										</div>
+										<div id="delete_table_confirm_box">
+											<div id="confirm_delete_box_inner">
+												<h2>Please confirm to delete the entries.</h2>
+											</div>
+										</div>
+										<form class="add_source_button_box" th:action="@{/deleteincomesource}" method="POST">
+											<div id="selected_delete_income_list" style="display: none;"></div>
+											<input class="button_style" type="button" name="update" id="deletedata" value="Delete" onclick="deleteDataFunc()" />
+											<input class="button_style" type="button" name="cancel" value="Cancel" onclick="resetDeleteFunc()" />
+											<input class="button_style" type="submit" name="submit" id="confirmdeletedata" value="Confirm"/>
+										</form>
 									</div>
 								</div>
-								
+
 							</div>
 						</div>
 					</div>
@@ -171,6 +229,144 @@
 	</div>
 	
 	<script type="text/javascript" th:inline="javascript">
+		
+		/* Fill table for view and update -- START*/
+		
+		window.onload = function() {
+			loadViewIncomeSources();
+			loadUpdateIncomeSources();
+			loadDeleteIncomeSources();
+		};
+		
+		function loadViewIncomeSources() {
+			/* console.log("loadViewIncomeSources"); */
+			const userIncomes = /*[[${userIncomes}]]*/"";
+			const tbody = document.getElementById("view_income_sources_table_data");
+			for (var i = 0; i < userIncomes.length; i++) {
+				var userIncome = userIncomes[i];
+				
+				var index = i+1;
+				var source_name = userIncome.source_name;
+				var date_added = userIncome.date_added.replace("T", " ").substring(0, userIncome.date_added.indexOf('.'));
+				var last_modified = userIncome.last_modified.replace("T", " ").substring(0, userIncome.last_modified.indexOf('.'));
+				var amount = convertIntMoneyToString(userIncome.amount);
+
+				var cell_array = [index, source_name, amount, date_added, last_modified];
+				var tr_container = document.createElement("tr");
+				tr_container.setAttribute("class", "update_row");
+				cell_array.forEach(cell => {
+					var td_container = document.createElement("td");
+					var div_container = document.createElement("div");
+					div_container.insertAdjacentText('beforeend', cell);
+					td_container.appendChild(div_container);
+					tr_container.appendChild(td_container);
+				});
+				var createClickHandler = function(index) {
+					return function() {
+						handleViewAllRowClick(index);
+					};
+				}
+				tr_container.onclick = createClickHandler(i);
+				tbody.appendChild(tr_container);
+			}
+		}
+		
+		function loadUpdateIncomeSources() {
+			/* console.log("loadUpdateIncomeSources"); */
+			const userIncomes = /*[[${userIncomes}]]*/"";
+			const tbody = document.getElementById("update_income_sources_table_data");
+			for (var i = 0; i < userIncomes.length; i++) {
+				var userIncome = userIncomes[i];
+				
+				var index = i+1;
+				var source_name = userIncome.source_name;
+				var date_added = userIncome.date_added.replace("T", " ").substring(0, userIncome.date_added.indexOf('.'));
+				var last_modified = userIncome.last_modified.replace("T", " ").substring(0, userIncome.last_modified.indexOf('.'));
+				var amount = convertIntMoneyToString(userIncome.amount);
+
+				var cell_array = [index, source_name, amount, date_added, last_modified];
+				var tr_container = document.createElement("tr");
+				tr_container.setAttribute("class", "update_row");
+				cell_array.forEach(cell => {
+					var td_container = document.createElement("td");
+					var div_container = document.createElement("div");
+					div_container.insertAdjacentText('beforeend', cell);
+					td_container.appendChild(div_container);
+					tr_container.appendChild(td_container);
+				});
+				var createClickHandler = function(index) {
+					return function() {
+						handleUpdateRowClick(index);
+					};
+				}
+				tr_container.onclick = createClickHandler(i);
+				tbody.appendChild(tr_container);
+			}
+		}
+		
+		function loadDeleteIncomeSources() {
+			/* console.log("loadUpdateIncomeSources"); */
+			const userIncomes = /*[[${userIncomes}]]*/"";
+			const tbody = document.getElementById("delete_income_sources_table_data");
+			for (var i = 0; i < userIncomes.length; i++) {
+				var userIncome = userIncomes[i];
+				
+				var source_name = userIncome.source_name;
+				var date_added = userIncome.date_added.replace("T", " ").substring(0, userIncome.date_added.indexOf('.'));
+				var last_modified = userIncome.last_modified.replace("T", " ").substring(0, userIncome.last_modified.indexOf('.'));
+				var amount = convertIntMoneyToString(userIncome.amount);
+				var checkbox_container = document.createElement("input");
+				checkbox_container.name = "delete_row_checkbox";
+				checkbox_container.type = "checkbox";
+				checkbox_container.value = i;
+				
+				var cell_array = [source_name, amount, date_added, last_modified];
+				
+				var tr_container = document.createElement("tr");
+				tr_container.setAttribute("class", "update_row");
+				
+				var td_container = document.createElement("td");
+				var div_container = document.createElement("div");
+				div_container.appendChild(checkbox_container);
+				td_container.appendChild(div_container);
+				tr_container.appendChild(td_container);
+				cell_array.forEach(cell => {
+					td_container = document.createElement("td");
+					div_container = document.createElement("div");
+					div_container.insertAdjacentText('beforeend', cell);
+					td_container.appendChild(div_container);
+					tr_container.appendChild(td_container);
+				});
+				var createClickHandler = function(index) {
+					return function() {
+						handleDeleteRowClick(index);
+					};
+				}
+				tr_container.onclick = createClickHandler(i);
+				tbody.appendChild(tr_container);
+			}
+		}
+		
+		function convertIntMoneyToString(amount) {
+			if (amount == 0)
+				return "0";
+			var amount_string = "";
+			var count = 0;
+			while (amount != 0) {
+				if (count % 3 == 0)
+					amount_string = ',' + amount_string;
+				amount_string = (amount % 10).toString() + amount_string;
+				amount = ~~(amount/10);
+				count++;
+			}
+			return "₹" + amount_string.substring(0, amount_string.length - 1);
+		}
+		
+		/* Fill table for view and update -- END */
+		
+		
+		/* Handle Images -- START */
+		
 		document.getElementById('profile_input_button').addEventListener('change', readURL1, true);
 		function readURL1() {
 			var file = document.getElementById("profile_input_button").files[0];
@@ -178,7 +374,8 @@
 				alert("Please select a image below 20MB!");
 				this.value = "";
 				return;
-			};
+			}
+			;
 			var reader = new FileReader();
 			reader.onloadend = function() {
 				document.getElementById('profile_img').style.backgroundImage = "url("
@@ -197,7 +394,8 @@
 				alert("Please select a image below 20MB!");
 				this.value = "";
 				return;
-			};
+			}
+			;
 			var reader = new FileReader();
 			reader.onloadend = function() {
 				document.getElementById('upper_card').style.backgroundImage = "url("
@@ -212,14 +410,173 @@
 		function clearResult() {
 			document.getElementById('profile_input_button')
 			document.getElementById('cover_input_button')
-			document.getElementById('profile_img').style.backgroundImage = "url("
-					+ /*[[${image_url}]]*/+")";
-			document.getElementById('upper_card').style.backgroundImage = "url("
-					+ /*[[${cover_image_url}]]*/+")";
+			document.getElementById('profile_img').style.backgroundImage = "url("+ /*[[${image_url}]]*/+")";
+			document.getElementById('upper_card').style.backgroundImage = "url("+ /*[[${cover_image_url}]]*/+")";
 		}
+		
+		/* Handle Images -- END */
+		
+		
+		/* Handle Row Click - VIEW ALL -- START */
+		
+		function handleViewAllRowClick(index) {
+			const show_table_div = document.getElementById('show_table_data');
+			const show_description_div = document.getElementById('show_description_box');
+			const description_content_div = document.getElementById('SecondRow');
+			const description_content = document.createElement("p");
+			const userIncomes = /*[[${userIncomes}]]*/"";
+			const userIncome = userIncomes[index];
+			
+			description_content_div.innerHTML = "";
+			description_content.textContent = userIncome.description;
+			description_content_div.appendChild(description_content);
+			show_table_div.style.opacity = "0.5";
+			show_description_div.style.display = "block";
+		}
+		
+		/* Handle Row Click -- END */
+		
+		
+		/* Handle Row Click - UPDATE -- START */
+		
+		function handleUpdateRowClick(index) {
+			const table_container_div = document.getElementById('update_table_container');
+			const form_container_div = document.getElementById('update_form_container');
+			const userIncomes = /*[[${userIncomes}]]*/"";
+			const userIncome = userIncomes[index];
+			
+			table_container_div.style.display = "none";
+			form_container_div.style.display = "block";
+			document.getElementById('update_source_box_income_id').setAttribute("value", userIncome.income_id);
+			document.getElementById('update_source_box_source_name').setAttribute("value", userIncome.source_name);
+			document.getElementById('update_source_box_amount').setAttribute("value", userIncome.amount);
+			document.getElementById('update_source_box_description').value = userIncome.description;
+		}
+		
+		function closeUpateDiv() {
+			closeConfirmUpdateDiv();
+			const table_container_div = document.getElementById('update_table_container');
+			const form_container_div = document.getElementById('update_form_container');
+			
+			form_container_div.style.display = "none";
+			table_container_div.style.display = "block";
+		}
+		
+		function openConfirmUpateDiv() {
+			const update_input_box = document.getElementById('update_input_box');
+			const confirm_update_box = document.getElementById('confirm_update_box');
+			const updateDataButton = document.getElementById('updatedata');
+			const submitDataButton = document.getElementById('submitdata');
+			
+			update_input_box.style.display = "none";
+			confirm_update_box.style.display = "block";
+			updateDataButton.style.display = "none";
+			submitDataButton.style.display = "block";
+		}
+		
+		function closeConfirmUpdateDiv() {
+			const update_input_box = document.getElementById('update_input_box');
+			const confirm_update_box = document.getElementById('confirm_update_box');
+			const updateDataButton = document.getElementById('updatedata');
+			const submitDataButton = document.getElementById('submitdata');
+			
+			confirm_update_box.style.display = "none";
+			update_input_box.style.display = "block";
+			submitDataButton.style.display = "none";
+			updateDataButton.style.display = "block";
+			
+		}
+		
+		/* Handle Row Click - UPDATE -- END */
+		
+		
+		/* Handle Row Click - DELETE -- START */
+		
+		function handleDeleteRowClick(index) {
+			const deleteCheckboxlist = document.getElementsByName('delete_row_checkbox');
+			
+			if(deleteCheckboxlist[index].checked == true)
+				deleteCheckboxlist[index].checked = false;
+			else
+				deleteCheckboxlist[index].checked = true;
+		}
+		
+		function resetCheckboxChecked() {
+			const deleteCheckboxlist = document.getElementsByName('delete_row_checkbox');
+			
+			deleteCheckboxlist.forEach(checkbox => {
+				checkbox.checked = false;				
+			});
+		}
+		
+		function resetDeleteFunc() {
+			const deleteTableConfirmBox = document.getElementById('delete_table_confirm_box');
+			const deleteTableData = document.getElementById('delete_table_data');
+			const deleteDataButton = document.getElementById('deletedata');
+			const confirmDeleteDataButton = document.getElementById('confirmdeletedata');
+			
+			deleteTableConfirmBox.style.display = "none";
+			deleteTableData.style.display = "block";
+			confirmDeleteDataButton.style.display = "none";
+			deleteDataButton.style.display = "block";
+		}
+		
+		function deleteDataFunc() {
+			const deleteTableConfirmBox = document.getElementById('delete_table_confirm_box');
+			const deleteTableData = document.getElementById('delete_table_data');
+			const deleteDataButton = document.getElementById('deletedata');
+			const confirmDeleteDataButton = document.getElementById('confirmdeletedata');
+			
+			const userIncomes = /*[[${userIncomes}]]*/"";
+			const deleteCheckboxlist = document.getElementsByName('delete_row_checkbox');
+			
+			var income_id_list = [];
+			var income_id = 0;
+			for(var i=0; i<deleteCheckboxlist.length; i++) {
+				if(deleteCheckboxlist[i].checked == true) {
+					income_id = userIncomes[i].income_id;
+					income_id_list.push(income_id);
+				}
+			}
+			
+			if(income_id_list.length == 0)
+				return;
+			
+			const selectedDeleteIncomeListDiv = document.getElementById('selected_delete_income_list');
+			selectedDeleteIncomeListDiv.innerHTML = "";
+			
+			var inputNumberElement;
+			income_id_list.forEach(income_id => {
+				inputNumberElement = document.createElement("input");
+				inputNumberElement.name = "income_id_list";
+				inputNumberElement.type = "number";
+				inputNumberElement.value = income_id;
+				selectedDeleteIncomeListDiv.appendChild(inputNumberElement);
+			});
+			
+			deleteTableData.style.display = "none";
+			deleteTableConfirmBox.style.display = "block";
+			deleteDataButton.style.display = "none";
+			confirmDeleteDataButton.style.display = "block";
+		}
+		
+		/* Handle Row Click - DELETE -- END */
+		
+		
+		/* Handle form reset -- START */
+		
+		function resetFormData() {
+			const resetBtn = document.getElementById('reset1');
+			resetBtn.click();
+		}
+		
+		/* Handle form reset -- END */
+		
+		
 	</script>
 	
 	<script>
+	
 		function reset_nav_buttons() {
 			$( "#navigation_box_1" ).css({"background":"#00aeef", "color":"white"});
 			$( "#navigation_box_2" ).css({"background":"#00aeef", "color":"white"});
@@ -240,14 +597,18 @@
 			reset_content_box();
 			$( this ).css({"background":"white", "color":"black"});
 			$( "#content_1" ).css({"display":"block"});
+			$( "#show_table_data" ).css({"opacity":"1"});
+			$( "#show_description_box" ).css({"display":"none"});
 		});
 		
 		$( "#navigation_box_2" )
 		.click( function() {
+			console.log("Hello2");
 			reset_nav_buttons();
 			reset_content_box();
 			$( this ).css({"background":"white", "color":"black"});
 			$( "#content_2" ).css({"display":"block"});
+			resetFormData();
 		});
 		
 		$( "#navigation_box_3" )
@@ -256,6 +617,7 @@
 			reset_content_box();
 			$( this ).css({"background":"white", "color":"black"});
 			$( "#content_3" ).css({"display":"block"});
+			closeUpateDiv();
 		});
 		
 		$( "#navigation_box_4" )
@@ -264,8 +626,19 @@
 			reset_content_box();
 			$( this ).css({"background":"white", "color":"black"});
 			$( "#content_4" ).css({"display":"block"});
+			resetCheckboxChecked();
+			resetDeleteFunc();
 		});
+		
+		$( "#descriptionClose" )
+		.click( function() {
+			$( "#show_table_data" ).css({"opacity":"1"});
+			$( "#show_description_box" ).css({"display":"none"});
+		});
+		
 	</script>
 	
+	
+	<div id="footer" th:include="footer::footer_body"></div>
 </body>
 </html>

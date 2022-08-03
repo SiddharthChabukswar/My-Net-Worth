@@ -124,13 +124,13 @@
 	color: #fff;
 }
 
-.button_style[type="submit"] {
+.button_style[type="submit"], .button_style[name="update"] {
 	border: 1px solid #00aeef;
 	background-color: white;
 	color: #00aeef;
 }
 
-.button_style[type="submit"]:hover {
+.button_style[type="submit"]:hover, .button_style[name="update"]:hover {
 	border: none;
 	background: #00395d;
 	color: #fff;
@@ -240,10 +240,78 @@
 .content_body {
 	/* background: red; */
 	height: 90%;
+	position: relative;
 	overflow: hidden;
 }
 
-.content_body #table_container {
+.content_body .description_box_div {
+	display: none;
+	background: white;
+	position: absolute;
+	overflow: auto;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 15%;
+	border-radius: 10px;
+	border-style: solid;
+	border-color: white;
+	height: 50%;
+	width: 70%;
+	padding: 1%;
+	top: 0px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.description_box_div #FirstFlexRow {
+	/* background: red; */
+	height: 20%;
+	width: 100%;
+	display: flex;
+	overflow: hidden;
+}
+
+#FirstFlexRow #descriptionHeading {
+	/* background: white; */
+	color: #00395d;
+	height: 100%;
+	width: 80%;
+	text-align: left;
+	overflow: hidden;
+}
+
+#FirstFlexRow #descriptionClose {
+	/* background: green; */
+	color: #00395d;
+	height: 100%;
+	width: 20%;
+	border-radius: 30px;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	overflow: hidden;
+}
+
+#FirstFlexRow #descriptionClose:hover {
+	background: #00aeef;
+	color: white;
+}
+
+.description_box_div #SecondRow {
+	background: #e6e6e6;
+	margin-top: 2%;
+	height: 75%;
+	width: 100%;
+	padding-top: 0.5%;
+	color: #00395d;
+	overflow: auto;
+}
+
+.content_body .table_container {
 	background: #e6e6e6; 
 	border-radius: 20px; 
 	margin: auto;
@@ -254,31 +322,75 @@
 	overflow: auto;
 }
 
-#table_container .styled-table {
+.content_body .table_container[id="delete_table_data"] {
+	height: 80%;
+}
+
+.table_container .styled-table {
+	position: relative;
 	border-radius: 10px;
     margin: auto;
     font-size: 1em;
     font-family: sans-serif;
     width: 100%;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    table-layout: fixed;
     overflow: hidden;
 }
 
+.styled-table thead {
+	height: 10%;
+	max-height: 10%;
+	min-height: 10%;
+	width: 100%;
+}
+
 .styled-table thead tr {
+	height: 100%;
+	width: 100%;
     background-color: #00aeef;
     color: #ffffff;
     text-align: left;
 }
 
-.styled-table th, .styled-table td {
-    padding: 12px 15px;
-    width: 20%;
+.styled-table thead tr th {
+	width: 23%;
+	min-width: 23%;
+	max-width: 23%;
+	padding: 12px 15px;
+}
+
+.styled-table tbody {
+	width: 100%;
 }
 
 .styled-table tbody tr {
-	background: yellow;
-	height: 5%;
+	/* background: red; */
+	width: 100%;
     border-bottom: 1px solid #dddddd;
+    text-align: left;
+}
+
+.styled-table tbody .update_row:hover {
+	/* background: red; */
+	cursor: pointer;
+	background-color: #00395d;
+	color: white;
+}
+
+.styled-table tbody tr td {
+	width: 23%;
+	min-width: 23%;
+	max-width: 23%;
+	padding: 0% 1%;
+}
+
+.styled-table tbody tr td div {
+	/* background: yellow; */
+	height: 70px;
+	width: 100%;
+	overflow: auto;
+	/* overflow-x: auto; */
 }
 
 .styled-table tbody tr:nth-of-type(even) {
@@ -290,7 +402,7 @@
 }
 
 
-.content_body #add_source_box {
+.content_body .source_form_class {
 	background: #e6e6e6;
 	border-radius: 20px; 
 	margin: auto;
@@ -300,13 +412,13 @@
 	overflow: auto;
 }
 
-#add_source_box #add_source_main_box {
+.source_form_class .add_source_main_box {
 	/* background: blue; */
 	height: 80%;
 	text-align: center;
 }
 
-#add_source_main_box .source_info_input {
+.add_source_main_box .source_info_input {
 	background: none;
 	margin: 2%;
 	margin-bottom: 0%;
@@ -314,12 +426,13 @@
 	height: 15%;
 	border: none;
 	outline: none;
-	text-align: center;
+	text-align: left;
 	color: #00395d;
 }
 
-#add_source_main_box .source_info_input:focus,#add_source_main_box .source_info_input:hover {
+.add_source_main_box .source_info_input:focus, .add_source_main_box .source_info_input:hover {
 	border-bottom: 2px solid #00395d;
+	background: none;
 	opacity: 0.5;
 }
 
@@ -330,28 +443,63 @@ input::-webkit-inner-spin-button {
 }
 
 
-#add_source_main_box #income_description {
+.add_source_main_box .income_description {
 	background: none;
 	margin-top: 2%; 
 	resize: none;
-	width: 90%;
+	width: 80%;
 	height: 60%;
 	border: none;
 	color: #00395d;
 	font-size: 20px;
 }
 
-#add_source_main_box #income_description:focus, #add_source_main_box #income_description:hover {
+.add_source_main_box .income_description:focus, .add_source_main_box .income_description:hover {
 	border: 2px solid #00395d;
 	border-radius: 10px;
 	opacity: 0.5;
 }
 
-#add_source_box #add_source_button_box {
+.source_form_class #confirm_update_box {
+	/* background: red; */
+	display: none;
+	color: #00395d;
+	height: 80%;
+}
+
+#confirm_update_box #confirm_update_box_inner {
+	/* background: green; */
+	display: flex;
+	color: #00395d;
+	height: 100%;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+.add_source_button_box {
 	/* background: red; */
 	height: 20%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	overflow: hidden;
+}
+
+.content_body #delete_table_confirm_box {
+	/* background: red; */
+	display: none;
+	color: #00395d;
+	margin-top: 1%;
+	height: 80%;
+}
+
+#delete_table_confirm_box #confirm_delete_box_inner {
+	/* background: green; */
+	display: flex;
+	color: #00395d;
+	height: 100%;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
 }

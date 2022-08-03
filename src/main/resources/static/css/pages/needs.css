@@ -1,0 +1,419 @@
+.main_row {
+	background: #e6e6e6;
+	border-radius: 10px;
+	padding: 1%
+}
+
+.main_row .main_left_box {
+	/* background: blue; */
+	height: 100%;
+	width: 20%;
+	min-width: 240px;
+	overflow: hidden;
+}
+
+.main_row .main_right_box {
+	background: white;
+	height: 100%;
+	width: 80%;
+	min-width: 960px;
+	overflow: hidden;
+}
+
+.main_left_box .left_navigation_bar {
+	background: #00aeef;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+
+.main_right_box .right_content_box {
+	/* background: green; */
+	display: none;
+	height: 100%;
+	width: 95%;
+	margin: auto;
+	overflow: hidden;
+}
+
+.content_heading {
+	/* background: white; */
+	margin: auto;
+	width: 70%;
+	color: #00395d;
+	text-align: center;
+}
+
+.content_heading h1 {
+	border-bottom: 2px solid #00395d;
+}
+
+.content_body {
+	/* background: green; */
+	position: relative;
+	margin: auto;
+	height: 90%;
+	width: 100%;
+	overflow: hidden;
+}
+
+.content_body .description_box_div {
+	display: none;
+	background: white;
+	position: absolute;
+	overflow: auto;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 10%;
+	border-radius: 10px;
+	border-style: solid;
+	border-color: white;
+	height: 50%;
+	width: 70%;
+	padding: 1%;
+	top: 0px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.description_box_div #FirstFlexRow {
+	/* background: red; */
+	height: 20%;
+	width: 100%;
+	display: flex;
+	overflow: hidden;
+}
+
+#FirstFlexRow #descriptionHeading {
+	/* background: white; */
+	color: #00395d;
+	height: 100%;
+	width: 80%;
+	text-align: left;
+	overflow: hidden;
+}
+
+#FirstFlexRow #descriptionClose {
+	/* background: green; */
+	color: #00395d;
+	height: 100%;
+	width: 20%;
+	border-radius: 30px;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	overflow: hidden;
+}
+
+#FirstFlexRow #descriptionClose:hover {
+	background: #00aeef;
+	color: white;
+}
+
+.description_box_div #SecondRow {
+	background: #e6e6e6;
+	margin-top: 1%;
+	height: 75%;
+	width: 100%;
+	padding-top: 0.5%;
+	color: #00395d;
+	overflow: auto;
+}
+
+.content_body .view_table_main_box {
+	background: #e6e6e6;
+	height: 95%;
+	width: 95%;
+	margin: auto;
+	margin-top: 1%;
+	border-radius: 20px;
+	padding: 1%;
+	overflow: auto;
+}
+
+.content_body .view_table_main_box[id="delete_table"] {
+	/* background: red; */
+	height: 76%;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+	overflow: auto;
+}
+
+.content_body .view_table_main_box[id="delete_data_form_confirm"] {
+	background: #e6e6e6;
+	height: 76%;
+	width: 95%;
+	margin: auto;
+	margin-top: 1%;
+	border-radius: 20px;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+	padding: 1%;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	align-items: center;
+	color: #00395d;
+	overflow: hidden;
+}
+
+.content_body .delete_row_form_box {
+	background: #e6e6e6;
+	width: 95%;
+	height: 19%;
+	margin: auto;
+	border-bottom-left-radius: 20px;
+	border-bottom-right-radius: 20px;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	align-items: center;
+	overflow: hidden;
+}
+
+.styled-table {
+	/* background: red; */
+	border-radius: 10px;
+	margin: auto;
+    font-size: 1em;
+    font-family: sans-serif;
+    width: 100%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    table-layout: fixed;
+    overflow: hidden;
+}
+
+.styled-table thead {
+	background: #00aeef;
+	height: 60px;
+	width: 100%;
+	overflow: hidden;
+}
+
+.styled-table thead tr {
+	height: 100%;
+	width: 100%;
+    color: #ffffff;
+    text-align: left;
+    overflow: hidden;
+}
+
+.styled-table thead tr th {
+	width: 19%;
+	padding: 12px 15px;
+}
+
+.styled-table tbody {
+	/* background: green; */
+	width: 100%;
+	overflow: auto;
+}
+
+.styled-table tbody tr {
+	/* background: red; */
+	height: 55px;
+	width: 100%;
+    border-bottom: 1px solid #dddddd;
+    text-align: left;
+    /* cursor: pointer; */
+}
+
+.styled-table tbody .update_row:hover {
+	/* background: red; */
+	cursor: pointer;
+	background-color: #00395d;
+	color: white;
+}
+
+.styled-table tbody tr td {
+	width: 19%;
+	padding: 0% 1%;
+}
+
+.styled-table tbody tr td div {
+	/* background: yellow; */
+	height: 70px;
+	width: 100%;
+	overflow: auto;
+	/* overflow-x: auto; */
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #00aeef;
+}
+
+.left_navigation_bar .nav_bar_heading {
+	/* background: white; */
+	width: 100%;
+	height: 18%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: white;
+	border-bottom: 2px solid #e6e6e6;
+	overflow: hidden;
+}
+
+.left_navigation_bar .nav_bar_row_box {
+	/* background: white; */
+	width: 100%;
+	height: 82%;
+	overflow: hidden;
+}
+
+.nav_bar_row_box .nav_bar_row {
+	/* background: white; */
+	width: 100%;
+	height: 10%;
+	border-bottom: 2px solid #e6e6e6;
+	display: flex;
+	padding-left: 10px;
+	justify-content: flex-start;
+	align-content: center;
+	align-items: center;
+	text-align: center;
+	color: white;
+	cursor: pointer;
+	overflow: hidden;
+}
+
+.nav_bar_row_box .nav_bar_row:hover {
+	/* background: white; */
+	border-bottom: 2px solid #00395d;
+}
+
+.nav_bar_row .nav_bar_icon {
+	/* background: white; */
+	width: 15%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	align-items: center;
+	overflow: hidden;
+}
+
+.nav_bar_row p {
+	padding-left: 2px;
+	margin-top: 3%;
+	font-size: 20px;	
+}
+
+.content_body .form_box {
+	background: #e6e6e6;
+	height: 95%;
+	width: 95%;
+	margin: auto;
+	margin-top: 1%;
+	border-radius: 20px;
+	overflow: auto;
+}
+
+.form_box .form_main_box {
+	/* background: orange; */
+	height: 80%;
+	text-align: center;
+	overflow: hidden;
+}
+
+.form_main_box .form_input_field {
+	background: none;
+	margin: 1.5%;
+	margin-bottom: 0%;
+	width: 90%;
+	height: 10%;
+	border: none;
+	outline: none;
+	text-align: left;
+	color: #00395d;
+}
+
+.form_main_box .form_input_field:focus, .form_main_box .form_input_field:hover {
+	background: none;
+	border-bottom: 2px solid #00395d;
+	opacity: 0.5;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.form_main_box .form_description_field {
+	background: none;
+	margin-top: 1.5%; 
+	resize: none;
+	width: 90%;
+	height: 50%;
+	border: none;
+	color: #00395d;
+	font-size: 20px;
+}
+
+.form_main_box .form_description_field:focus, .form_main_box .form_description_field:hover {
+	border: 2px solid #00395d;
+	border-radius: 10px;
+	opacity: 0.5;
+}
+
+.form_box .form_confirm_upate_box {
+	/* background: orange; */
+	height: 80%;
+	color: #00395d;
+	display: flex;
+	align-content: center;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	overflow: hidden;
+}
+
+.form_button_box {
+	/* background: green; */
+	height: 20%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+}
+
+.button_style {
+	border: none;
+	outline: none;
+	height: 60%;
+	width: 30%;
+	color: #fff;
+	font-size: 16px;
+	font-weight: 100;
+	cursor: pointer;
+	border-radius: 20px;
+	background: #00aeef;
+	margin: 0 3%;
+	margin-top: 0.5%;
+}
+
+.button_style:hover {
+	background: #00395d;
+	color: #fff;
+}
+
+.button_style[type="submit"], .button_style[name="update"] {
+	border: 1px solid #00aeef;
+	background-color: white;
+	color: #00aeef;
+}
+
+.button_style[type="submit"]:hover, .button_style[name="update"]:hover {
+	border: none;
+	background: #00395d;
+	color: #fff;
+}

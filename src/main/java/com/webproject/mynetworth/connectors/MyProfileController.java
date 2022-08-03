@@ -16,6 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.webproject.mynetworth.entities.UserIncome;
 import com.webproject.mynetworth.services.SaveImageFileToStorage;
 
+
+
 @Controller
 public class MyProfileController extends ControllerParent {
 
@@ -25,6 +27,7 @@ public class MyProfileController extends ControllerParent {
 		int uid = this.getUidFromSession(session, principal);
 		try {
 			model = this.getRequiredUserDetails.myProfilePageDetails(model, uid);
+			model = this.userIncomeService.getAllIncomeSources(model, uid);
 			model.addAttribute("user_income", new UserIncome());
 		} catch (Exception e) {
 			// System.out.println(e);
@@ -63,6 +66,11 @@ public class MyProfileController extends ControllerParent {
 		return "redirect:/myprofile";
 	}
 	
+	@RequestMapping(value = { "/addincomesource" }, method = { RequestMethod.GET })
+	private String addIncomeSourceGet(Model model) {
+		return "redirect:/myprofile";
+	}
+
 	@RequestMapping(value = { "/addincomesource" }, method = { RequestMethod.POST })
 	private String addIncomeSource(
 			UserIncome userIncome,
@@ -78,4 +86,48 @@ public class MyProfileController extends ControllerParent {
 		}
 		return "redirect:/myprofile";
 	}
+	
+	@RequestMapping(value = { "/updateincomesource" }, method = { RequestMethod.GET })
+	private String updateIncomeSourceGet(Model model) {
+		return "redirect:/myprofile";
+	}
+
+	@RequestMapping(value = { "/updateincomesource" }, method = { RequestMethod.POST })
+	private String updateIncomeSource(
+			@RequestParam(value = "income_id") Integer income_id,
+			@RequestParam(value = "source_name") String source_name,
+			@RequestParam(value = "amount") Integer amount,
+			@RequestParam(value = "description") String description,
+			HttpSession session,
+			Principal principal,
+			Model model) {
+		int uid = this.getUidFromSession(session, principal);
+		try {
+			this.userIncomeService.updateIncomeSource(uid, income_id, source_name, amount, description);
+		} catch (Exception e) {
+			// System.out.println(e);
+		}
+		return "redirect:/myprofile";
+	}
+	
+	@RequestMapping(value = { "/deleteincomesource" }, method = { RequestMethod.GET })
+	private String deleteIncomeSourceGet(Model model) {
+		return "redirect:/myprofile";
+	}
+
+	@RequestMapping(value = { "/deleteincomesource" }, method = { RequestMethod.POST })
+	private String deleteIncomeSource(
+			@RequestParam(value = "income_id_list") Integer[] income_id_list,
+			HttpSession session,
+			Principal principal,
+			Model model) {
+		int uid = this.getUidFromSession(session, principal);
+		try {
+			this.userIncomeService.deleteIncomeSources(uid, income_id_list);
+		} catch (Exception e) {
+			// System.out.println(e);
+		}
+		return "redirect:/myprofile";
+	}
+
 }

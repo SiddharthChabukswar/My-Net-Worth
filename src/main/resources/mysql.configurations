@@ -55,9 +55,78 @@ CREATE TABLE `UserIncome`(
 	INDEX(uid)
 );
 
+CREATE TABLE `NeedsCategories`(
+	need_id INT(10) UNSIGNED PRIMARY KEY NOT NULL,
+	category_name VARCHAR(100) NOT NULL UNIQUE
+);
+
+CREATE TABLE `UserNeeds`(
+	user_need_id INT(10) UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	need_id INT(10) UNSIGNED NOT NULL,
+	uid INT(10) UNSIGNED NOT NULL,
+	need_name VARCHAR(100) NOT NULL,
+	amount INT(10) UNSIGNED NOT NULL,
+	date_added TIMESTAMP NOT NULL,
+	last_modified TIMESTAMP NOT NULL,
+	description TEXT,
+	FOREIGN KEY(need_id)
+		REFERENCES NeedsCategories(need_id)
+		ON DELETE CASCADE,
+	FOREIGN KEY(uid)
+		REFERENCES UserData(uid)
+		ON DELETE CASCADE,
+	INDEX(uid)	
+);
+
+INSERT INTO `NeedsCategories` VALUES('1', 'Insurance');
+INSERT INTO `NeedsCategories` VALUES('2', 'Household');
+INSERT INTO `NeedsCategories` VALUES('3', 'Communication');
+INSERT INTO `NeedsCategories` VALUES('4', 'Transportation');
+INSERT INTO `NeedsCategories` VALUES('5', 'EMI');
+INSERT INTO `NeedsCategories` VALUES('6', 'Miscellaneous');
+
+
+CREATE TABLE `InvestmentsCategories`(
+	investment_id INT(10) UNSIGNED PRIMARY KEY NOT NULL,
+	category_name VARCHAR(100) NOT NULL UNIQUE
+);
+
+CREATE TABLE `UserInvestments`(
+	user_investment_id INT(10) UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	investment_id INT(10) UNSIGNED NOT NULL,
+	uid INT(10) UNSIGNED NOT NULL,
+	investment_name VARCHAR(100) NOT NULL,
+	amount INT(10) UNSIGNED NOT NULL,
+	date_added TIMESTAMP NOT NULL,
+	last_modified TIMESTAMP NOT NULL,
+	description TEXT,
+	FOREIGN KEY(investment_id)
+		REFERENCES InvestmentsCategories(investment_id)
+		ON DELETE CASCADE,
+	FOREIGN KEY(uid)
+		REFERENCES UserData(uid)
+		ON DELETE CASCADE,
+	INDEX(uid)	
+);
+
+INSERT INTO `InvestmentsCategories` VALUES('1', 'Cash');
+INSERT INTO `InvestmentsCategories` VALUES('2', 'Fixed deposits');
+INSERT INTO `InvestmentsCategories` VALUES('3', 'Mutual funds');
+INSERT INTO `InvestmentsCategories` VALUES('4', 'Equities');
+INSERT INTO `InvestmentsCategories` VALUES('5', 'Cryptocurrencies');
+INSERT INTO `InvestmentsCategories` VALUES('6', 'E.P.F.');
+INSERT INTO `InvestmentsCategories` VALUES('7', 'P.P.F.');
+INSERT INTO `InvestmentsCategories` VALUES('8', 'Real Estate');
+INSERT INTO `InvestmentsCategories` VALUES('9', 'Others');
+
+
 SHOW TABLES;
 
 SELECT * FROM `User`;
 SELECT * FROM `UserData`;
 SELECT * FROM `UserIncome`;
+SELECT * FROM `NeedsCategories`;
+SELECT * FROM `UserNeeds`;
+SELECT * FROM `InvestmentsCategories`;
+SELECT * FROM `UserInvestments`;
 SELECT * FROM hibernate_sequence;

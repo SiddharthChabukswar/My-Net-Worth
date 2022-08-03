@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="header::header_head('Explore')">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/pages/home.css}">
 </head>
 <body>
-	<div th:include="header::header_body('explore')">
 	
-	</div>
+	<div th:include="header::header_body('explore')"></div>
 	
-	<div class="container" style="margin-top: 90px;">
+	<div class="container-fluid">
 		<h1>Explore</h1>
 	</div>
 	
+	<div id="footer" th:include="footer::footer_body"></div>
 </body>
 </html>

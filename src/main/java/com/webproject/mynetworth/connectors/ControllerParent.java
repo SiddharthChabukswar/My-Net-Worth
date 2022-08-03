@@ -10,6 +10,8 @@ import com.webproject.mynetworth.services.GetRequiredUserDetails;
 import com.webproject.mynetworth.services.GetUserIdService;
 import com.webproject.mynetworth.services.SetRequiredUserDetails;
 import com.webproject.mynetworth.services.UserIncomeService;
+import com.webproject.mynetworth.services.UserInvestmentsService;
+import com.webproject.mynetworth.services.UserNeedsService;
 
 public class ControllerParent {
 
@@ -18,13 +20,19 @@ public class ControllerParent {
 
 	@Autowired
 	protected GetRequiredUserDetails getRequiredUserDetails;
-	
+
 	@Autowired
 	protected SetRequiredUserDetails setRequiredUserDetails;
-	
+
 	@Autowired
 	protected UserIncomeService userIncomeService;
 	
+	@Autowired
+	protected UserNeedsService userNeedsService;
+	
+	@Autowired
+	protected UserInvestmentsService userInvestmentsService;
+
 	// Get uid from session - called by every handler except login & signup
 	protected int getUidFromSession(HttpSession session, Principal principal) {
 		if (session.getAttribute("uid") == null) {
@@ -34,5 +42,5 @@ public class ControllerParent {
 		int uid = (int) session.getAttribute("uid");
 		return uid;
 	}
-	
+
 }

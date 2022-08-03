@@ -1,15 +1,617 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="header::header_head('Investments')">
+<head th:replace="header::header_head('Investments')"></head>
+<head>
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/pages/home.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/pages/investments.css}">
 </head>
 <body>
-	<div th:include="header::header_body('investments')">
+
+	<div th:include="header::header_body('investments')"></div>
 	
+	<div class="container-fluid">
+		<div class="main_row">
+			<div class="main_left_box">
+				<div class="left_navigation_bar">
+					<div class="nav_bar_heading">
+						<h2>Investments</h2>
+					</div>
+					<div class="nav_bar_row_box">
+						<div class="nav_bar_row" id="navigation_box_1" style="background: white; color: #00395d;">
+							<div class="nav_bar_icon">
+								<img alt="view" id="navigation_icon_1" th:src="@{/img/icons/search_blue.png}" />
+							</div>
+							<p>View all assets</p>
+						</div>
+						<div class="nav_bar_row" id="navigation_box_2">
+							<div class="nav_bar_icon">
+								<img alt="add" id="navigation_icon_2" th:src="@{/img/icons/add_white.png}" />
+							</div>
+							<p>Add an asset</p>
+						</div>
+						<div class="nav_bar_row" id="navigation_box_3">
+							<div class="nav_bar_icon">
+								<img alt="update" id="navigation_icon_3" th:src="@{/img/icons/update_white.png}" />
+							</div>
+							<p>Update an asset</p>
+						</div>
+						<div class="nav_bar_row" id="navigation_box_4">
+							<div class="nav_bar_icon">
+								<img alt="delete" id="navigation_icon_4" th:src="@{/img/icons/delete_white.png}" />
+							</div>
+							<p>Delete assets</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="main_right_box">
+			
+				<!-- View all assets block -->
+				<div class="right_content_box" id="content_box_1" style="display: block;">
+					<div class="content_heading">
+						<h1>View All Assets</h1>
+					</div>
+					
+					<div class="content_body">
+						<div class="view_table_main_box" id="view_table">
+							<table class="styled-table">
+								<thead>
+									<tr>
+										<th style="width: 7%;">#</th>
+										<th>Asset name</th>
+										<th>Asset type</th>
+										<th>Amount</th>
+										<th>Date Added</th>
+										<th>Last Modified</th>
+									</tr>
+								</thead>
+								<tbody id="view_table_data">
+								</tbody>
+							</table>
+						</div>
+
+						<div class="description_box_div" id="show_description_box">
+							<div id="FirstFlexRow">
+								<div id="descriptionHeading">
+									<h2>Description</h2>
+								</div>
+								<div id="descriptionClose">
+									<span>Close</span>
+								</div>
+							</div>
+							<div id="SecondRow"></div>
+						</div>
+					</div>
+				</div>
+				
+				<!-- Add an asset block -->
+				<div class="right_content_box" id="content_box_2">
+					<div class="content_heading">
+						<h1>Add An Assets</h1>
+					</div>
+					
+					<div class="content_body">
+						<form class="form_box" id="add_data_form" th:action="@{/adduserinvestment}" th:object="${user_investment}" method="POST">
+							<div class="form_main_box">
+								<h2>
+									<input class="form_input_field" type="text" th:name="investment_name" th:field="*{investment_name}" placeholder="Asset name" pattern=".{2,100}" required="required" autocomplete="off"/>
+									<input class="form_input_field" type="number" th:name="amount" th:field="*{amount}" placeholder="Asset amount" min="1" max="2147483647" required="required" autocomplete="off"/>
+									<select class="form_input_field" style="color: #6c757d;" th:name="investment_id" id="asset_id_selector" required="required">
+										<!-- <option disabled="disabled" selected="selected" value="">Asset Category</option> -->
+									</select>
+								</h2>
+								<textarea class="form_description_field" th:name="description" th:field="*{description}" placeholder="Add asset description ..." maxlength="65535"></textarea>
+							</div>
+							<div class="form_button_box">
+								<input class="button_style" type="submit" name="submit" value="Add" />
+								<input class="button_style" id="reset_1" type="reset" name="reset" value="Reset"/>
+							</div>
+						</form>
+					</div>
+				</div>
+				
+				<!-- Update an asset block -->
+				<div class="right_content_box" id="content_box_3">
+					<div class="content_heading">
+						<h1>Update An Asset</h1>
+					</div>
+					
+					<div class="content_body">
+						<div class="view_table_main_box" id="update_table">
+							<table class="styled-table">
+								<thead>
+									<tr>
+										<th style="width: 7%;">#</th>
+										<th>Asset name</th>
+										<th>Asset type</th>
+										<th>Amount</th>
+										<th>Date Added</th>
+										<th>Last Modified</th>
+									</tr>
+								</thead>
+								<tbody id="update_table_data">
+								</tbody>
+							</table>
+						</div>
+						
+						<form class="form_box" id="update_data_form" th:action="@{/updateuserinvestment}" method="POST">
+							<div class="form_main_box" id="update_data_form_main_box">
+								<h2>
+									<input class="form_input_field" id="update_user_investment_id" type="number" th:name="user_investment_id" required="required" style="display: none;"/>
+									<input class="form_input_field" id="update_investment_name" type="text" th:name="investment_name" placeholder="Asset name" pattern=".{2,100}" required="required" autocomplete="off" />
+									<input class="form_input_field" id="update_investment_amount" type="number" th:name="amount" placeholder="Asset amount" min="1" max="2147483647" required="required" autocomplete="off" />
+									<select class="form_input_field" th:name="investment_id" id="asset_id_selector_2" required="required">
+										<!-- <option disabled="disabled" selected="selected" value="">Asset Category</option> -->
+									</select>
+								</h2>
+								<textarea class="form_description_field" id="update_investment_description" th:name="description" placeholder="Update asset description ..." maxlength="65535"></textarea>
+							</div>
+							<div class="form_confirm_upate_box" id="update_data_form_confirm">
+								<h2>Please confirm to update the changes.</h2>
+							</div>
+							<div class="form_button_box">								
+								<input class="button_style" type="button" name="update" id="updatedata" value="Update" onclick="openConfirmUpateDiv()" />
+								<input class="button_style" type="button" name="cancel" value="Cancel" onclick="closeUpateDiv()" />
+								<input class="button_style" type="submit" name="submit" id="submitdata" value="Submit" style="display: none;"/>
+							</div>
+						</form>
+					</div>
+				</div>
+				
+				<!-- Delete assets block -->
+				<div class="right_content_box" id="content_box_4">
+					<div class="content_heading">
+						<h1>Delete Assets</h1>
+					</div>
+					
+					<div class="content_body">
+						<div class="view_table_main_box" id="delete_table">
+							<table class="styled-table">
+								<thead>
+									<tr>
+										<th style="width: 7%;">#</th>
+										<th>Asset name</th>
+										<th>Asset type</th>
+										<th>Amount</th>
+										<th>Date Added</th>
+										<th>Last Modified</th>
+									</tr>
+								</thead>
+								<tbody id="delete_table_data">
+								</tbody>
+							</table>
+							
+							
+						</div>
+						
+						<div class="view_table_main_box" id="delete_data_form_confirm" style="display: none;">
+							<h2>Please confirm to delete the data.</h2>
+						</div>
+						
+						<form class="delete_row_form_box" th:action="@{/deleteuserinvestment}" method="POST">
+							<div id="selected_delete_investments_list" style="display: none;"></div>
+							<input class="button_style" type="button" name="update" id="deletedata" value="Delete" onclick="deleteDataFunc()" />
+							<input class="button_style" type="button" name="cancel" value="Cancel" onclick="resetDeleteFunc()" />
+							<input class="button_style" type="submit" name="submit" id="confirmdeletedata" value="Confirm" style="display: none;"/>
+						</form>
+					</div>
+				</div>
+			</div>
+			
+		</div>
 	</div>
 	
-	<div class="container" style="margin-top: 90px;">
-		<h1>Investments</h1>
-	</div>
+	
+	<script type="text/javascript" th:inline="javascript">
+	
+		/* Fill table for view and update -- START*/
+		
+		window.onload = function() {
+			loadAssetsCategories('asset_id_selector');
+			loadAssetsCategories('asset_id_selector_2');
+			loadViewUserAssets();
+			loadUpdateUserAssets();
+			loadDeleteUserAssets();
+		};
+	
+		function loadAssetsCategories(asset_selector_id) {
+			/* console.log("loadAssetsCategories"); */
+			const assetsCategories = /*[[${investmentsCategories}]]*/"";
+			const assetIdSelector = document.getElementById(asset_selector_id);
+			assetIdSelector.innerHTML = '';
+			
+			var optionElement = document.createElement('option');
+			optionElement.setAttribute('disabled', 'disabled');
+			optionElement.setAttribute('selected', 'selected');
+			optionElement.value = '';
+			optionElement.insertAdjacentText('beforeend', 'Asset Category');
+			assetIdSelector.appendChild(optionElement);
+			
+			assetsCategories.forEach(assetsCategory => {
+				optionElement = document.createElement('option');
+				optionElement.value = assetsCategory.investment_id;
+				optionElement.insertAdjacentText('beforeend', assetsCategory.category_name);
+				assetIdSelector.appendChild(optionElement);
+			});
+		}
+		
+		function loadViewUserAssets() {
+			/* console.log("loadViewUserAssets"); */
+			const userAssets = /*[[${userInvestments}]]*/'';
+			const tbody = document.getElementById('view_table_data');
+			for (var i = 0; i < userAssets.length; i++) {
+				var userAsset = userAssets[i];
+				
+				var index = i+1;
+				var source_name = userAsset.investment_name;
+				var asset_type = userAsset.investment_id.category_name;
+				var date_added = userAsset.date_added.replace("T", " ").substring(0, userAsset.date_added.indexOf('.'));
+				var last_modified = userAsset.last_modified.replace("T", " ").substring(0, userAsset.last_modified.indexOf('.'));
+				var amount = convertIntMoneyToString(userAsset.amount);
+				
+				
+				var cell_array = [index, source_name, asset_type, amount, date_added, last_modified];
+				var tr_container = document.createElement("tr");
+				tr_container.setAttribute("class", "update_row");
+				
+				
+				cell_array.forEach(cell => {
+					var td_container = document.createElement("td");
+					var div_container = document.createElement("div");
+					div_container.insertAdjacentText('beforeend', cell);
+					td_container.appendChild(div_container);
+					tr_container.appendChild(td_container);
+				});
+				
+				var createClickHandler = function(index) {
+					return function() {
+						handleViewAllRowClick(index);
+					};
+				}
+				tr_container.onclick = createClickHandler(i);
+				tbody.appendChild(tr_container);
+			}
+		}
+		
+		function loadUpdateUserAssets() {
+			/* console.log("loadUpdateUserAssets"); */
+			const userAssets = /*[[${userInvestments}]]*/'';
+			const tbody = document.getElementById('update_table_data');
+			for (var i = 0; i < userAssets.length; i++) {
+				var userAsset = userAssets[i];
+				
+				var index = i+1;
+				var source_name = userAsset.investment_name;
+				var asset_type = userAsset.investment_id.category_name;
+				var date_added = userAsset.date_added.replace("T", " ").substring(0, userAsset.date_added.indexOf('.'));
+				var last_modified = userAsset.last_modified.replace("T", " ").substring(0, userAsset.last_modified.indexOf('.'));
+				var amount = convertIntMoneyToString(userAsset.amount);
+
+				var cell_array = [index, source_name, asset_type, amount, date_added, last_modified];
+				var tr_container = document.createElement("tr");
+				tr_container.setAttribute("class", "update_row");
+				cell_array.forEach(cell => {
+					var td_container = document.createElement("td");
+					var div_container = document.createElement("div");
+					div_container.insertAdjacentText('beforeend', cell);
+					td_container.appendChild(div_container);
+					tr_container.appendChild(td_container);
+				});
+				
+				var createClickHandler = function(index) {
+					return function() {
+						handleUpdateRowClick(index);
+					};
+				}
+				tr_container.onclick = createClickHandler(i);
+				tbody.appendChild(tr_container);
+			}
+		}
+		
+		function loadDeleteUserAssets() {
+			/* console.log("loadDeleteUserAssets"); */
+			const userAssets = /*[[${userInvestments}]]*/'';
+			const tbody = document.getElementById('delete_table_data');
+			for (var i = 0; i < userAssets.length; i++) {
+				var userAsset = userAssets[i];
+				
+				var index = i+1;
+				var source_name = userAsset.investment_name;
+				var asset_type = userAsset.investment_id.category_name;
+				var date_added = userAsset.date_added.replace("T", " ").substring(0, userAsset.date_added.indexOf('.'));
+				var last_modified = userAsset.last_modified.replace("T", " ").substring(0, userAsset.last_modified.indexOf('.'));
+				var amount = convertIntMoneyToString(userAsset.amount);
+				var checkbox_container = document.createElement("input");
+				checkbox_container.name = "delete_row_checkbox";
+				checkbox_container.type = "checkbox";
+				checkbox_container.value = i;
+
+				var cell_array = [source_name, asset_type, amount, date_added, last_modified];
+				var tr_container = document.createElement("tr");
+				tr_container.setAttribute("class", "update_row");
+				
+				var td_container = document.createElement("td");
+				var div_container = document.createElement("div");
+				div_container.appendChild(checkbox_container);
+				td_container.appendChild(div_container);
+				tr_container.appendChild(td_container);
+				cell_array.forEach(cell => {
+					var td_container = document.createElement("td");
+					var div_container = document.createElement("div");
+					div_container.insertAdjacentText('beforeend', cell);
+					td_container.appendChild(div_container);
+					tr_container.appendChild(td_container);
+				});
+				
+				var createClickHandler = function(index) {
+					return function() {
+						handleDeleteRowClick(index);
+					};
+				}
+				tr_container.onclick = createClickHandler(i);
+				tbody.appendChild(tr_container);
+			}
+		}
+		
+		function convertIntMoneyToString(amount) {
+			if (amount == 0)
+				return "0";
+			var amount_string = "";
+			var count = 0;
+			while (amount != 0) {
+				if (count % 3 == 0)
+					amount_string = ',' + amount_string;
+				amount_string = (amount % 10).toString() + amount_string;
+				amount = ~~(amount/10);
+				count++;
+			}
+			return "₹" + amount_string.substring(0, amount_string.length - 1);
+		}
+		
+		/* Fill table for view and update -- END*/
+		
+		
+		/* Handle Row click - View All page -- START */
+		
+		function handleViewAllRowClick(index) {
+			const show_table_div = document.getElementById('view_table');
+			const show_description_div = document.getElementById('show_description_box');
+			const description_content_div = document.getElementById('SecondRow');
+			const description_content = document.createElement("p");			
+			const userAssets = /*[[${userInvestments}]]*/'';
+			const userAsset = userAssets[index];
+			
+			description_content_div.innerHTML = "";
+			description_content.textContent = userAsset.description;
+			description_content_div.appendChild(description_content);
+			show_table_div.style.opacity = "0.5";
+			show_description_div.style.display = "block";
+		}
+		
+		/* Handle View All page -- END */
+		
+		
+		/* Handle Row click - Update page -- START */
+		
+		function handleUpdateRowClick(index) {
+			const update_table_div = document.getElementById('update_table');
+			const update_data_form = document.getElementById('update_data_form');
+			const asset_id_selector_options = document.getElementById('asset_id_selector_2').children;
+			const userAssets = /*[[${userInvestments}]]*/'';
+			const userAsset = userAssets[index];
+			
+			update_table_div.style.display = "none";
+			update_data_form.style.display = "block";
+			document.getElementById('update_user_investment_id').setAttribute("value", userAsset.user_investment_id);
+			document.getElementById('update_investment_name').setAttribute("value", userAsset.investment_name);
+			document.getElementById('update_investment_amount').setAttribute("value", userAsset.amount);			
+			Array.from(asset_id_selector_options).forEach(option => {
+				if(option.value == userAsset.investment_id.investment_id) {
+					option.setAttribute('selected', 'selected');
+				}
+			});
+			document.getElementById('update_investment_description').value = userAsset.description;
+		}
+		
+		function closeUpateDiv() {
+			closeConfirmUpdateDiv();
+			const update_table = document.getElementById('update_table');
+			const update_data_form = document.getElementById('update_data_form');
+			
+			update_data_form.style.display = "none";
+			update_table.style.display = "block";
+		}
+		
+		function openConfirmUpateDiv() {
+			const update_data_form_main_box = document.getElementById('update_data_form_main_box');
+			const update_data_form_confirm = document.getElementById('update_data_form_confirm');
+			const updateDataButton = document.getElementById('updatedata');
+			const submitDataButton = document.getElementById('submitdata');
+			
+			update_data_form_main_box.style.display = "none";
+			update_data_form_confirm.style.display = "flex";
+			updateDataButton.style.display = "none";
+			submitDataButton.style.display = "block";
+		}
+		
+		function closeConfirmUpdateDiv() {
+			const update_data_form_main_box = document.getElementById('update_data_form_main_box');
+			const update_data_form_confirm = document.getElementById('update_data_form_confirm');
+			const updateDataButton = document.getElementById('updatedata');
+			const submitDataButton = document.getElementById('submitdata');
+			
+			update_data_form_confirm.style.display = "none";
+			update_data_form_main_box.style.display = "block";
+			submitDataButton.style.display = "none";
+			updateDataButton.style.display = "block";
+		}
+		
+		/* Handle Row click - Update page -- END */
+		
+		
+		/* Handle Row click - Delete page -- START */
+		
+		function handleDeleteRowClick(index) {
+			const deleteCheckboxlist = document.getElementsByName('delete_row_checkbox');
+			
+			if(deleteCheckboxlist[index].checked == true)
+				deleteCheckboxlist[index].checked = false;
+			else
+				deleteCheckboxlist[index].checked = true;
+		}
+		
+		/* Handle Row click - Delete page -- END */
+		
+		
+		/* Handle form reset -- START */
+		
+		function resetFormData(reset_id) {
+			const resetBtn = document.getElementById(reset_id);
+			resetBtn.click();
+		}
+		
+		function resetCheckboxChecked() {
+			const deleteCheckboxlist = document.getElementsByName('delete_row_checkbox');
+			
+			deleteCheckboxlist.forEach(checkbox => {
+				checkbox.checked = false;				
+			});
+		}
+		
+		function resetDeleteFunc() {
+			const deleteDataFormConfirm = document.getElementById('delete_data_form_confirm');
+			const deleteTableData = document.getElementById('delete_table');
+			const deleteDataButton = document.getElementById('deletedata');
+			const confirmDeleteDataButton = document.getElementById('confirmdeletedata');
+			
+			deleteDataFormConfirm.style.display = "none";
+			deleteTableData.style.display = "block";
+			confirmDeleteDataButton.style.display = "none";
+			deleteDataButton.style.display = "block";
+		}
+		
+		function deleteDataFunc() {
+			const deleteDataFormConfirm = document.getElementById('delete_data_form_confirm');
+			const deleteTableData = document.getElementById('delete_table');
+			const deleteDataButton = document.getElementById('deletedata');
+			const confirmDeleteDataButton = document.getElementById('confirmdeletedata');
+			
+			const userAssets = /*[[${userInvestments}]]*/"";
+			const deleteCheckboxlist = document.getElementsByName('delete_row_checkbox');
+			
+			var user_investment_id_list = [];
+			var user_investment_id = 0;
+			for(var i=0; i<deleteCheckboxlist.length; i++) {
+				if(deleteCheckboxlist[i].checked == true) {
+					user_investment_id = userAssets[i].user_investment_id;
+					user_investment_id_list.push(user_investment_id);
+				}
+			}
+			
+			if(user_investment_id_list.length == 0)
+				return;
+			
+			const selectedDeleteInvestmentsList = document.getElementById('selected_delete_investments_list');
+			selectedDeleteInvestmentsList.innerHTML = "";
+			
+			var inputNumberElement;
+			user_investment_id_list.forEach(user_investment_id => {
+				inputNumberElement = document.createElement("input");
+				inputNumberElement.name = "delete_user_investment_id_list";
+				inputNumberElement.type = "number";
+				inputNumberElement.value = user_investment_id;
+				selectedDeleteInvestmentsList.appendChild(inputNumberElement);
+			});
+			
+			deleteTableData.style.display = "none";
+			deleteDataFormConfirm.style.display = "flex";
+			deleteDataButton.style.display = "none";
+			confirmDeleteDataButton.style.display = "block";
+		}
+		
+		/* Handle form reset -- END */
+		
+	</script>
+	
+	
+	<script>
+	
+		function reset_nav_buttons() {
+			$( "#navigation_box_1" ).css({"background":"#00aeef", "color":"white"});
+			$( "#navigation_box_2" ).css({"background":"#00aeef", "color":"white"});
+			$( "#navigation_box_3" ).css({"background":"#00aeef", "color":"white"});
+			$( "#navigation_box_4" ).css({"background":"#00aeef", "color":"white"});
+			
+			$( "#navigation_icon_1" ).attr({"src":"/img/icons/search_white.png"});
+			$( "#navigation_icon_2" ).attr({"src":"/img/icons/add_white.png"});
+			$( "#navigation_icon_3" ).attr({"src":"/img/icons/update_white.png"});
+			$( "#navigation_icon_4" ).attr({"src":"/img/icons/delete_white.png"});
+		}
+		
+		function reset_content_box() {
+			$( "#content_box_1" ).css({"display":"none"});
+			$( "#content_box_2" ).css({"display":"none"});
+			$( "#content_box_3" ).css({"display":"none"});
+			$( "#content_box_4" ).css({"display":"none"});
+		}
+	
+		$( "#navigation_box_1" )
+		.click( function() {
+			reset_nav_buttons();
+			reset_content_box();
+			$( this ).css({"background":"white", "color":"#00395d"});
+			$( "#navigation_icon_1" ).attr({"src":"/img/icons/search_blue.png"});
+			$( "#content_box_1" ).css({"display":"block"});
+		});
+		
+		$( "#navigation_box_2" )
+		.click( function() {
+			reset_nav_buttons();
+			reset_content_box();
+			$( this ).css({"background":"white", "color":"#00395d"});
+			$( "#navigation_icon_2" ).attr({"src":"/img/icons/add_blue.png"});
+			$( "#content_box_2" ).css({"display":"block"});
+			$( "#asset_id_selector" ).css({"color":"#6c757d"});
+			resetFormData('reset_1');
+		});
+		
+		$( "#navigation_box_3" )
+		.click( function() {
+			reset_nav_buttons();
+			reset_content_box();
+			$( this ).css({"background":"white", "color":"#00395d"});
+			$( "#navigation_icon_3" ).attr({"src":"/img/icons/update_blue.png"});
+			$( "#content_box_3" ).css({"display":"block"});
+			closeUpateDiv();
+		});
+		
+		$( "#navigation_box_4" )
+		.click( function() {
+			reset_nav_buttons();
+			reset_content_box();
+			$( this ).css({"background":"white", "color":"#00395d"});
+			$( "#navigation_icon_4" ).attr({"src":"/img/icons/delete_blue.png"});
+			$( "#content_box_4" ).css({"display":"block"});
+			resetCheckboxChecked();
+			resetDeleteFunc();
+		});
+		
+		$( "#asset_id_selector" )
+		.on("change", function() {
+			$( this ).css({"color":"#00395d"});
+		});
+		
+		$( "#descriptionClose" )
+		.click( function() {
+			$( "#view_table" ).css({"opacity":"1"});
+			$( "#show_description_box" ).css({"display":"none"});
+		});
+		
+	</script>
+	
+	<div id="footer" th:include="footer::footer_body"></div>
 	
 </body>
 </html>

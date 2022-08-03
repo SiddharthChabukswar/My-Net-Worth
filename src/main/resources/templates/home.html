@@ -19,8 +19,8 @@
 
 	<div id="header" th:include="header::header_body('home')"></div>
 
-	<div id="body_structure" class="container-fluid">
-		<div id="main_row">
+	<div class="container-fluid">
+		<div class="main_row">
 			<div id="main_left_column">
 				<div id="card_box">
 					<div id="full_card">
@@ -175,6 +175,8 @@
 			$( "#description_row2" ).toggle("medium");
 		});
 	</script>
+	
+	<div id="footer" th:include="footer::footer_body"></div>
 
 </body>
 </html>
