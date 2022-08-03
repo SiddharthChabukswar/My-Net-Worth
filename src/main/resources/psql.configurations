@@ -1,0 +1,145 @@
+user = 'mynetworthadmin'
+host = 'localhost'
+password = 'mynetworthadmin'
+database = 'mynetworthdb'
+
+CREATE ROLE mynetworthadmin
+	WITH
+	LOGIN
+	SUPERUSER
+	INHERIT
+	CREATEDB
+	CREATEROLE
+	NOREPLICATION
+	ENCRYPTED PASSWORD 'SCRAM-SHA-256$4096:YMRI71/QJ5uy2GvPIUfNYw==$nq2x8CS406v4S5Od5XB9CNddGqRCUj/MJu4hVED30Hc=:KeJfBNi07qeIkCcCr+oWrCKHuEPR4poLG4E7zUrNySU=';
+COMMENT ON ROLE mynetworthadmin IS 'mynetworthadmin';
+
+CREATE DATABASE mynetworthdb
+	WITH
+	OWNER = postgres
+	ENCODING = 'UTF8'
+	LC_COLLATE = 'English_United Kingdom.1252'
+	LC_CTYPE = 'English_United Kingdom.1252'
+	TABLESPACE = pg_default
+	CONNECTION LIMIT = -1;
+COMMENT ON DATABASE mynetworthdb IS 'mynetworthdb';
+	
+
+psql -U mynetworthadmin mynetworthdb
+mynetworthadmin
+
+
+SHOW TABLES;
+
+CREATE TABLE `User`(
+	uid INT(10) UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	email VARCHAR(100) NOT NULL UNIQUE,
+	password VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE `UserData`(
+	uid INT(10) UNSIGNED PRIMARY KEY NOT NULL,
+	name VARCHAR(100) NOT NULL,
+	dob DATE NOT NULL,
+	about_me TEXT,
+	age INT(3) NOT NULL,
+	image_url VARCHAR(100) NOT NULL,
+	cover_image_url VARCHAR(100) NOT NULL,
+	total_net_worth INT(10) NOT NULL,
+	numof_income_source INT(10) NOT NULL,
+	sumof_income_source INT(10) NOT NULL,
+	numof_needs INT(10) NOT NULL,
+	sumof_needs INT(10) NOT NULL,
+	numof_assets INT(10) NOT NULL,
+	sumof_assets INT(10) NOT NULL
+);
+
+CREATE TABLE `UserIncome`(
+	income_id INT(10) UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	uid INT(10) UNSIGNED NOT NULL,
+	amount INT(10) UNSIGNED NOT NULL,
+	source_name VARCHAR(100) NOT NULL,
+	date_added TIMESTAMP NOT NULL,
+	last_modified TIMESTAMP NOT NULL,
+	description TEXT,
+	FOREIGN KEY(uid)
+		REFERENCES UserData(uid)
+		ON DELETE CASCADE,
+	INDEX(uid)
+);
+
+CREATE TABLE `NeedsCategories`(
+	need_id INT(10) UNSIGNED PRIMARY KEY NOT NULL,
+	category_name VARCHAR(100) NOT NULL UNIQUE
+);
+
+CREATE TABLE `UserNeeds`(
+	user_need_id INT(10) UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	need_id INT(10) UNSIGNED NOT NULL,
+	uid INT(10) UNSIGNED NOT NULL,
+	need_name VARCHAR(100) NOT NULL,
+	amount INT(10) UNSIGNED NOT NULL,
+	date_added TIMESTAMP NOT NULL,
+	last_modified TIMESTAMP NOT NULL,
+	description TEXT,
+	FOREIGN KEY(need_id)
+		REFERENCES NeedsCategories(need_id)
+		ON DELETE CASCADE,
+	FOREIGN KEY(uid)
+		REFERENCES UserData(uid)
+		ON DELETE CASCADE,
+	INDEX(uid)	
+);
+
+INSERT INTO `NeedsCategories` VALUES('1', 'Insurance');
+INSERT INTO `NeedsCategories` VALUES('2', 'Household');
+INSERT INTO `NeedsCategories` VALUES('3', 'Communication');
+INSERT INTO `NeedsCategories` VALUES('4', 'Transportation');
+INSERT INTO `NeedsCategories` VALUES('5', 'EMI');
+INSERT INTO `NeedsCategories` VALUES('6', 'Miscellaneous');
+
+
+CREATE TABLE `InvestmentsCategories`(
+	investment_id INT(10) UNSIGNED PRIMARY KEY NOT NULL,
+	category_name VARCHAR(100) NOT NULL UNIQUE
+);
+
+CREATE TABLE `UserInvestments`(
+	user_investment_id INT(10) UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	investment_id INT(10) UNSIGNED NOT NULL,
+	uid INT(10) UNSIGNED NOT NULL,
+	investment_name VARCHAR(100) NOT NULL,
+	amount INT(10) UNSIGNED NOT NULL,
+	date_added TIMESTAMP NOT NULL,
+	last_modified TIMESTAMP NOT NULL,
+	description TEXT,
+	FOREIGN KEY(investment_id)
+		REFERENCES InvestmentsCategories(investment_id)
+		ON DELETE CASCADE,
+	FOREIGN KEY(uid)
+		REFERENCES UserData(uid)
+		ON DELETE CASCADE,
+	INDEX(uid)	
+);
+
+INSERT INTO `InvestmentsCategories` VALUES('1', 'Cash');
+INSERT INTO `InvestmentsCategories` VALUES('2', 'Fixed deposits');
+INSERT INTO `InvestmentsCategories` VALUES('3', 'Mutual funds');
+INSERT INTO `InvestmentsCategories` VALUES('4', 'Equities');
+INSERT INTO `InvestmentsCategories` VALUES('5', 'Cryptocurrencies');
+INSERT INTO `InvestmentsCategories` VALUES('6', 'E.P.F.');
+INSERT INTO `InvestmentsCategories` VALUES('7', 'P.P.F.');
+INSERT INTO `InvestmentsCategories` VALUES('8', 'Real Estate');
+INSERT INTO `InvestmentsCategories` VALUES('9', 'Others');
+
+
+SHOW TABLES;
+
+SELECT * FROM `User`;
+SELECT * FROM `UserData`;
+SELECT * FROM `UserIncome`;
+SELECT * FROM `NeedsCategories`;
+SELECT * FROM `UserNeeds`;
+SELECT * FROM `InvestmentsCategories`;
+SELECT * FROM `UserInvestments`;
+SELECT * FROM hibernate_sequence;

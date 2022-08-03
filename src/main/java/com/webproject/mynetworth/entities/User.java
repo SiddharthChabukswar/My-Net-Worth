@@ -8,12 +8,16 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "User")
+@Table(name = "Users")
 public class User {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer uid;
+	
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.AUTO)
+//	private Integer uid;
 
 	@Column(nullable = false, unique = true, length = 100)
 	private String email;

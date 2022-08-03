@@ -20,8 +20,12 @@ import org.hibernate.annotations.OnDeleteAction;
 public class UserIncome {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer income_id;
+	
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.AUTO)
+//	private Integer income_id;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(nullable = false, name = "uid")
